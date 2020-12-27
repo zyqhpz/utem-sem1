@@ -4,15 +4,29 @@
 #include <iomanip>
 using namespace std;
 
+struct Mark {
+	int quiz1;
+	int quiz2;
+	int quiz3;
+	double total;
+};
+
+struct Student {
+	string name;
+	string matricNum;
+};
+
 int numStudent();
 int displayMenu();
-void nameList(string &matricN, double &q1, double &q2, double &q3, double &total);
+void nameList(string matricN[], int);
 void displayNameWithMark(string[], string[], double[], int);
 void displayName(string[], string[], int);
 
 int main() {
 
-	int n = numStudent(),choice;
+	int num = numStudent(), choice;
+
+	const int n = num;
 
 	string *matricNumber = new string[n];
 	string *studentName = new string[n];
@@ -20,6 +34,8 @@ int main() {
 	double *quiz2 = new double[n];
 	double *quiz3 = new double[n];
 	double *totalMarks = new double[n];
+
+	nameList(matricNumber, n);
 
 	for (int i = 0; i < n; i++) {
 		cin.ignore();
@@ -100,12 +116,19 @@ int numStudent() {
 	return n;
 }
 
+void nameList(string matricN[], int n) {
+	cin.ignore();
+	for (int i = 0; i < n; i++) {
+		cout << "Matric number: ";
+		cin >> matricN[i];
+	}
+}
+
 void displayNameWithMark(string nList[], string mList[], double fMarks[], int size) {
 	cout << endl << "\tName\tMatric Number\tFinal Mark" << endl;
 	for (int i = 0; i < size; i++) {
 		cout << i + 1 << ".\t" << nList[i] << "\t" << mList[i] << "\t\t" << fMarks[i] << endl;
 	}
-
 }
 
 void displayName(string nList[], string mList[], int size) {
