@@ -8,19 +8,22 @@ struct Mark {
 	int quiz1;
 	int quiz2;
 	int quiz3;
-	double total;
+	double totalMarks;
 };
 
-struct Student {
+struct Participant {
 	string name;
-	string matricNum;
+	string matricNumber;
+	Mark test;
 };
+
+Participant student[1000];
 
 int numStudent();
 int displayMenu();
-void nameList(string matricN[], int);
-void displayNameWithMark(string[], string[], double[], int);
-void displayName(string[], string[], int);
+void getName(int);
+void displayNameWithMark(int);
+void displayName(int);
 
 int main() {
 
@@ -28,34 +31,7 @@ int main() {
 
 	const int n = num;
 
-	string *matricNumber = new string[n];
-	string *studentName = new string[n];
-	double *quiz1 = new double[n];
-	double *quiz2 = new double[n];
-	double *quiz3 = new double[n];
-	double *totalMarks = new double[n];
-
-	nameList(matricNumber, n);
-
-	for (int i = 0; i < n; i++) {
-		cin.ignore();
-		cout << endl << "Student name: ";
-		getline(cin, studentName[i]);
-		cout << "Matric number: ";
-		getline(cin, matricNumber[i]);
-		cout << "Enter Quiz 1 mark: ";
-		cin >> quiz1[i];
-		cout << "Enter Quiz 2 mark: ";
-		cin >> quiz2[i];
-		cout << "Enter Quiz 3 mark: ";
-		cin >> quiz3[i];
-
-		totalMarks[i] = (quiz1[i] + quiz2[i] + quiz3[i]) / 3;
-		//round of 2 decimal places
-		totalMarks[i] = ceil(totalMarks[i] * 100.0) / 100.0;
-
-		cout << "Total Marks : " << totalMarks[i] << endl;
-	}
+	getName(n);
 
 	do {
 		choice = displayMenu();
@@ -65,20 +41,24 @@ int main() {
 			break;
 		}
 		else if (choice == 1)
-			displayName(studentName, matricNumber, n);
+			displayName(n);
 		else if (choice == 2)
-			displayNameWithMark(studentName, matricNumber, totalMarks, n);
+			displayNameWithMark(n);
 		else if (choice == 3)
 			cout << "highest mark";
 		else if (choice == 4)
 			cout << "lowest";
 		else if (choice == 5)
+			cout << "highest lowest each quiz";
+		else if (choice == 6)
 			cout << "search";
+
 		else
 			cout << "invalid input";
 
 		cout << endl;
-	} while (choice > -1 || choice < 6);
+	} while (choice > -1 || choice < 7);
+
 	return 0;
 }
 
@@ -97,7 +77,8 @@ int displayMenu() {
 		cout << "|\t\t\t\t" << left << setw(30) << "2 - Final Mark" << right << setw(39) << "|" << endl;
 		cout << "|\t\t\t\t" << left << setw(30) << "3 - Highest Mark" << right << setw(39) << "|" << endl;
 		cout << "|\t\t\t\t" << left << setw(30) << "4 - Lowest Mark" << right << setw(39) << "|" << endl;
-		cout << "|\t\t\t\t" << left << setw(30) << "5 - Search with Specific Mark" << right << setw(39) << "|" << endl;
+		cout << "|\t\t\t\t" << left << setw(30) << "5 - Highest and Lowest each quiz" << right << setw(37) << "|" << endl;
+		cout << "|\t\t\t\t" << left << setw(30) << "6 - Search with Specific Mark" << right << setw(39) << "|" << endl;
 		cout << "|\t\t\t\t" << left << setw(30) << "0 - Exit" << right << setw(39) << "|" << endl;
 		cout << "|" << setw(100) << "|" << endl;
 		cout << "|\t\t\t\t" << left << setw(30) << "Please enter 0/1/2/3/4/5 to choose." << right << setw(34) << "|" << endl;
@@ -116,24 +97,40 @@ int numStudent() {
 	return n;
 }
 
-void nameList(string matricN[], int n) {
-	cin.ignore();
-	for (int i = 0; i < n; i++) {
-		cout << "Matric number: ";
-		cin >> matricN[i];
-	}
-}
-
-void displayNameWithMark(string nList[], string mList[], double fMarks[], int size) {
+void displayNameWithMark(int size) {
 	cout << endl << "\tName\tMatric Number\tFinal Mark" << endl;
 	for (int i = 0; i < size; i++) {
-		cout << i + 1 << ".\t" << nList[i] << "\t" << mList[i] << "\t\t" << fMarks[i] << endl;
+		cout << i + 1 << ".\t" << student[i].name << "\t" << student[i].matricNumber << "\t\t" << student[i].test.totalMarks << endl;
 	}
 }
 
-void displayName(string nList[], string mList[], int size) {
+void displayName(int size) {
 	cout << endl << "\tName\tMatric Number" << endl;
 	for (int i = 0; i < size; i++) {
-		cout << i + 1 << ".\t" << nList[i] << "\t" << mList[i] << endl;
+		cout << i + 1 << ".\t" << student[i].name << "\t" << student[i].matricNumber << endl;
+	}
+}
+
+void getName(int n) {
+	for (int i = 0; i < n; i++) {
+		cin.ignore();
+		student[i].test.totalMarks = 0;
+		cout << endl << "Student name: ";
+		getline(cin, student[i].name);
+		cout << "Matric number: ";
+		getline(cin, student[i].matricNumber);
+		cout << "Enter Quiz 1 mark: ";
+		cin >> student[i].test.quiz1;
+		student[i].test.totalMarks += student[i].test.quiz1;
+		cout << "Enter Quiz 2 mark: ";
+		cin >> student[i].test.quiz2;
+		student[i].test.totalMarks += student[i].test.quiz2;
+		cout << "Enter Quiz 3 mark: ";
+		cin >> student[i].test.quiz3;
+		student[i].test.totalMarks += student[i].test.quiz3;
+
+		//round of 2 decimal places
+
+		cout << "Total Marks : " << student[i].test.totalMarks << endl;
 	}
 }
