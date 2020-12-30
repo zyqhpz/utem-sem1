@@ -8,7 +8,6 @@ using namespace std;
 
 struct Subject {
 	int subject[8];
-	/*
 	int bahasa;
 	int english;
 	int history;
@@ -17,7 +16,6 @@ struct Subject {
 	int biology;
 	int chemistry;
 	int physics;
-	*/
 	double totalMark;
 	int rank;
 };
@@ -32,22 +30,31 @@ struct Participant {
 Participant student[1000];
 
 struct Subject3 {
+	int subject3[8];
 	double totalMarkLH;
+	int bahasa3;
+	int english3;
+	int history3;
+	int math3;
+	int addMath3;
+	int biology3;
+	int chemistry3;
+	int physics3;
 	int rank3;
 };
 
 struct Participant3 {
-	string nameLH;
-	string icNumLH;
+	string name3;
+	string icNum3;
 	Subject3 mark3;
-	double avgLH;
+	double avg3;
 };
 
 Participant3 student3[1000];
 
 int numStudent();
 int displayMenu();
-void getName(string[], int);
+void getName(int);
 void displayName(int);
 Participant calculateAverageMark(int);
 void displayTotalMark(int);
@@ -55,7 +62,20 @@ void displayHtoL(int);
 void displayLtoH(int);
 void reverseRanks(int);
 bool compareLowHigh(Participant3, Participant3);
+void resetValue(int);
+int selectSubject(string[]);
 
+bool compareBahasa(Participant3, Participant3);
+bool compareEnglish(Participant3, Participant3);
+bool compareHistory(Participant3, Participant3);
+bool compareMath(Participant3, Participant3);
+bool compareAddMath(Participant3, Participant3);
+bool compareBio(Participant3, Participant3);
+bool compareChem(Participant3, Participant3);
+bool comparePhy(Participant3, Participant3);
+
+void displayNameWithSubject(int , string[], int);
+void compareSubjectMark(int, int);
 
 // main by Fatin
 int main() {
@@ -63,11 +83,20 @@ int main() {
 	string subject[8] = { "Bahasa Melayu", "English", "History", "Mathematics", "Additional Mathematics", "Biology", "Chemistry", "Physics" };
 	string f5Class[4] = { "5 Alchemilla", "5 Begonia", "5 Calendula", "5 Dahlia" };
 
-	int num = numStudent(), choice;
+	// BM - 0
+	// English - 1
+	// History - 2
+	// Math - 3
+	// AddMath - 4
+	// Bio - 5
+	// Chem - 6
+	// Physics - 7
+
+	int num = numStudent(), choice, select;
 
 	const int n = num;
 
-	getName(subject, n);
+	getName(n);
 
 	Participant average;
 	average = calculateAverageMark(n);
@@ -87,12 +116,14 @@ int main() {
 			displayHtoL(n);
 		else if (choice == 4) 
 			displayLtoH(n);
-		else if (choice == 5)
-			cout << "highest lowest each subject";
+		else if (choice == 5) {
+			select = selectSubject(subject);
+			displayNameWithSubject(select, subject, n);
+		}
 		else if (choice == 6)
-			cout << "search specific subject and display highest and lowest";
+			cout << "Program is not ready yet";
 		else
-			cout << "invalid input";
+			cout << "Invalid choice";
 
 		cout << endl;
 	} while (choice > -1 || choice < 7);
@@ -109,7 +140,7 @@ int numStudent() {
 }
 
 // get input function by Haziq
-void getName(string subject[], int n) {
+void getName(int n) {
 	for (int i = 0; i < n; i++) {
 		cin.ignore();
 		student[i].mark.totalMark = 0;
@@ -117,10 +148,23 @@ void getName(string subject[], int n) {
 		getline(cin, student[i].name);
 		cout << "Enter student's IC number: ";
 		getline(cin, student[i].icNumber);
-		for (int j = 0; j < 8; j++) {
-			cout << "Enter mark for " << subject[j] << ": ";
-			cin >> student[i].mark.subject[j];
-		}
+
+		cout << "Enter mark for Bahasa Melayu: ";
+		cin >> student[i].mark.bahasa;
+		cout << "Enter mark for English: ";
+		cin >> student[i].mark.english;
+		cout << "Enter mark for History: ";
+		cin >> student[i].mark.history;
+		cout << "Enter mark for Mathematics: ";
+		cin >> student[i].mark.math;
+		cout << "Enter mark for Additional Mathematics: ";
+		cin >> student[i].mark.addMath;
+		cout << "Enter mark for Biology: ";
+		cin >> student[i].mark.biology;
+		cout << "Enter mark for Chemistry: ";
+		cin >> student[i].mark.chemistry;
+		cout << "Enter mark for Physics: ";
+		cin >> student[i].mark.physics;
 	}
 }
 
@@ -133,10 +177,10 @@ int displayMenu() {
 	cout << "=====================================================================================================" << endl;
 	cout << "|\t\t\t" << left << setw(40) << "1 - Namelist" << right << setw(37) << "|" << endl;
 	cout << "|\t\t\t" << left << setw(40) << "2 - Total and Average mark" << right << setw(37) << "|" << endl;
-	cout << "|\t\t\t" << left << setw(40) << "3 - Highest Mark to Lowest Mark" << right << setw(37) << "|" << endl;
-	cout << "|\t\t\t" << left << setw(40) << "4 - Lowest Mark to Highest Mark" << right << setw(37) << "|" << endl;
-	cout << "|\t\t\t" << left << setw(40) << "5 - Highest and Lowest each subject" << right << setw(37) << "|" << endl;
-	cout << "|\t\t\t" << left << setw(40) << "6 - Search highest and lowest mark for specific subject" << right << setw(22) << "|" << endl;
+	cout << "|\t\t\t" << left << setw(40) << "3 - Highest to Lowest Total and Average Mark" << right << setw(33) << "|" << endl;
+	cout << "|\t\t\t" << left << setw(40) << "4 - Lowest to Highest Total and Average Mark" << right << setw(33) << "|" << endl;
+	cout << "|\t\t\t" << left << setw(40) << "5 - Highest to Lowest for Each Subject" << right << setw(37) << "|" << endl;
+	cout << "|\t\t\t" << left << setw(40) << "6 - Search certain mark in certain subject" << right << setw(35) << "|" << endl;
 	cout << "|\t\t\t" << left << setw(40) << "0 - Exit" << right << setw(37) << "|" << endl;
 	cout << "|" << setw(100) << "|" << endl;
 	cout << "|\t\t\t\t" << left << setw(30) << "Please enter 0/1/2/3/4/5/6 to choose." << right << setw(32) << "|" << endl;
@@ -159,8 +203,8 @@ void displayName(int size) {
 Participant calculateAverageMark(int n) {
 	Participant average;
 	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < 8; j++) 
-			student[i].mark.totalMark += student[i].mark.subject[j];
+		student[i].mark.totalMark = student[i].mark.bahasa + student[i].mark.english + student[i].mark.history + student[i].mark.math
+			+ student[i].mark.addMath + student[i].mark.biology + student[i].mark.chemistry + student[i].mark.physics;
 		student[i].averageMark = student[i].mark.totalMark / 8;
 	}
 	return average;
@@ -250,16 +294,10 @@ void reverseRanks(int n) {
 		student3[i].mark3.rank3 = i - 1;
 }
 
-// modify data lowest to highest by Haziq
+// function to display data lowest to highest by Haziq
 void displayLtoH(int n) {
 
-	for (int i = 0; i < n; i++) {
-		student3[i].nameLH = student[i].name;
-		student3[i].icNumLH = student[i].icNumber;
-		student3[i].avgLH = student[i].averageMark;
-		student3[i].mark3.totalMarkLH = student[i].mark.totalMark;
-	}
-
+	resetValue(n);
 	reverseRanks(n);
 
 	cout << "\n=====================================================================================================" << endl;
@@ -269,6 +307,151 @@ void displayLtoH(int n) {
 	cout << endl << left << setw(25) << "\tName" << "\tIC Number\tTotal Mark\tAverage Mark" << endl;
 
 	for (int i = 0; i < n; i++)
-		cout << i + 1 << ".\t" << left << setw(25) << student3[i].nameLH << "\t" << student3[i].icNumLH << "\t\t" << fixed << setprecision(1) << student3[i].mark3.totalMarkLH << "\t\t" << fixed << setprecision(1) << student3[i].avgLH << endl;
+		cout << i + 1 << ".\t" << left << setw(25) << student3[i].name3 << "\t" << student3[i].icNum3 << "\t\t" << fixed << setprecision(1) << student3[i].mark3.totalMarkLH << "\t\t" << fixed << setprecision(1) << student3[i].avg3 << endl;
 	cout << endl;
+}
+
+// select subject by Fatin
+int selectSubject(string subject[]) {
+	int select;
+	cout << "List of subject:" << endl;
+	for (int i = 1; i <= 8; i++) {
+		cout << i << ". " << subject[i - 1] << endl;
+	}
+	cout << "\nSelect subject: ";
+	cin >> select;
+	return select - 1;
+}
+
+// function to compare marks between students to arrange mark in array by Haziq
+bool compareBahasa(Participant3 a, Participant3 b) {
+	if (a.mark3.bahasa3 != b.mark3.bahasa3)
+		return a.mark3.bahasa3 > b.mark3.bahasa3;
+	else
+		return 0;
+}
+
+bool compareEnglish(Participant3 a, Participant3 b) {
+	if (a.mark3.english3 != b.mark3.english3)
+		return a.mark3.english3 > b.mark3.english3;
+	else
+		return 0;
+}
+
+bool compareHistory(Participant3 a, Participant3 b) {
+	if (a.mark3.history3 != b.mark3.history3)
+		return a.mark3.history3 > b.mark3.history3;
+	else
+		return 0;
+}
+
+bool compareMath(Participant3 a, Participant3 b) {
+	if (a.mark3.math3 != b.mark3.math3)
+		return a.mark3.math3 > b.mark3.math3;
+	else
+		return 0;
+}
+
+bool compareAddMath(Participant3 a, Participant3 b) {
+	if (a.mark3.addMath3 != b.mark3.addMath3)
+		return a.mark3.addMath3 > b.mark3.addMath3;
+	else
+		return 0;
+}
+
+bool compareBio(Participant3 a, Participant3 b) {
+	if (a.mark3.biology3 != b.mark3.biology3)
+		return a.mark3.biology3 > b.mark3.biology3;
+	else
+		return 0;
+}
+
+bool compareChem(Participant3 a, Participant3 b) {
+	if (a.mark3.chemistry3 != b.mark3.chemistry3)
+		return a.mark3.chemistry3 > b.mark3.chemistry3;
+	else
+		return 0;
+}
+
+bool comparePhy(Participant3 a, Participant3 b) {
+	if (a.mark3.physics3 != b.mark3.physics3)
+		return a.mark3.physics3 > b.mark3.physics3;
+	else
+		return 0;
+}
+
+//function to sort array by Fatin
+void compareSubjectMark(int n, int choice) {
+
+	if (choice == 0)
+		sort(student3, student3 + n, compareBahasa);
+	else if (choice == 1)
+		sort(student3, student3 + n, compareEnglish);
+	else if (choice == 2)
+		sort(student3, student3 + n, compareHistory);
+	else if (choice == 3)
+		sort(student3, student3 + n, compareMath);
+	else if (choice == 4)
+		sort(student3, student3 + n, compareAddMath);
+	else if (choice == 5)
+		sort(student3, student3 + n, compareBio);
+	else if (choice == 6)
+		sort(student3, student3 + n, compareChem);
+	else
+		sort(student3, student3 + n, comparePhy);
+
+	for (int i = 0; i < n; i++)
+		student3[i].mark3.rank3 = i + 1;
+}
+
+// display name with highest to lowest mark in certain subject by Fatin
+void displayNameWithSubject(int choice, string subject[], int size) {
+	resetValue(size);
+
+	cout << "\n=====================================================================================================" << endl;
+	cout << "|" << setw(60) << "HIGHEST MARK TO LOWEST MARK" << setw(40) << "|" << endl;
+	cout << "=====================================================================================================" << endl;
+
+	cout << endl << "\tName\tIC Number\t" << subject[choice] << endl;
+	compareSubjectMark(size, choice);
+	for (int i = 0; i < size; i++) {
+		cout << i + 1 << ".\t" << student3[i].name3 << "\t" << student3[i].icNum3 << "\t\t";
+
+		if (choice == 0)
+			cout << student3[i].mark3.bahasa3;
+		else if (choice == 1)
+			cout << student3[i].mark3.english3;
+		else if (choice == 2)
+			cout << student3[i].mark3.history3;
+		else if (choice == 3)
+			cout << student3[i].mark3.math3;
+		else if (choice == 4)
+			cout << student3[i].mark3.addMath3;
+		else if (choice == 5)
+			cout << student3[i].mark3.biology3;
+		else if (choice == 6)
+			cout << student3[i].mark3.chemistry3;
+		else
+			cout << student3[i].mark3.physics3;
+
+		cout << endl;
+	}
+}
+
+// function to reset value in new Structure by Haziq
+void resetValue(int n) {
+	for (int i = 0; i < n; i++) {
+		student3[i].name3 = student[i].name;
+		student3[i].icNum3 = student[i].icNumber;
+		student3[i].avg3 = student[i].averageMark;
+		student3[i].mark3.totalMarkLH = student[i].mark.totalMark;
+		student3[i].mark3.bahasa3 = student[i].mark.bahasa;
+		student3[i].mark3.english3 = student[i].mark.english;
+		student3[i].mark3.history3 = student[i].mark.history;
+		student3[i].mark3.math3 = student[i].mark.math;
+		student3[i].mark3.addMath3 = student[i].mark.addMath;
+		student3[i].mark3.biology3 = student[i].mark.biology;
+		student3[i].mark3.chemistry3 = student[i].mark.chemistry;
+		student3[i].mark3.physics3 = student[i].mark.physics;
+	}
 }
