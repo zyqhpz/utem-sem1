@@ -77,6 +77,10 @@ bool comparePhy(Participant3, Participant3);
 void displayNameWithSubject(int , string[], int);
 void compareSubjectMark(int, int);
 
+bool compareNameAZ(Participant3, Participant3);
+bool compareNameZA(Participant3, Participant3);
+void displayNameSorted(int);
+
 // main by Fatin
 int main() {
 
@@ -109,7 +113,7 @@ int main() {
 			break;
 		}
 		else if (choice == 1)
-			displayName(n);
+			displayNameSorted(n);
 		else if (choice == 2)
 			displayTotalMark(n);
 		else if (choice == 3)
@@ -193,11 +197,14 @@ int displayMenu() {
 
 // display namelist by Kak Lok
 void displayName(int size) {
+	resetValue(size);
 	cout << endl << "\tName\tIC Number" << endl;
 	for (int i = 0; i < size; i++) {
 		cout << i + 1 << ".\t" << student[i].name << "\t" << student[i].icNumber << endl;
 	}
 }
+
+
 
 // calculate average by Kak Lok
 Participant calculateAverageMark(int n) {
@@ -453,5 +460,35 @@ void resetValue(int n) {
 		student3[i].mark3.biology3 = student[i].mark.biology;
 		student3[i].mark3.chemistry3 = student[i].mark.chemistry;
 		student3[i].mark3.physics3 = student[i].mark.physics;
+	}
+}
+
+bool compareNameAZ(Participant3 a, Participant3 b) {
+	if (a.name3 != b.name3)
+		return a.name3 < b.name3;
+	else
+		return 0;
+}
+
+bool compareNameZA(Participant3 a, Participant3 b) {
+	if (a.name3 != b.name3)
+		return a.name3 > b.name3;
+	else
+		return 0;
+}
+
+void displayNameSorted(int size) {
+	int choice;
+	cout << "Select to display in: \n1.\tAscending\n2.\tDescending\nChoose: ";
+	cin >> choice;
+	resetValue(size);
+	if (choice == 1)
+		sort(student3, student3 + size, compareNameAZ);
+	if (choice == 2)
+		sort(student3, student3 + size, compareNameZA);
+
+	cout << endl << "\tName\tIC Number" << endl;
+	for (int i = 0; i < size; i++) {
+		cout << i + 1 << ".\t" << student3[i].name3 << "\t" << student3[i].icNum3 << endl;
 	}
 }
