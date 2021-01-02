@@ -20,6 +20,9 @@ struct Subject {
 	int rank;
 };
 
+
+
+
 struct Participant {
 	string name;
 	string icNumber;
@@ -492,3 +495,4 @@ void displayNameSorted(int size) {
 		cout << i + 1 << ".\t" << student3[i].name3 << "\t" << student3[i].icNum3 << endl;
 	}
 }
+
