@@ -26,6 +26,10 @@ struct Participant {
 	Subject mark;
 	double averageMark;
 };
+struct Class {
+	string className[4];
+	Participant form5;
+};
 
 Participant student[1000];
 
@@ -86,6 +90,7 @@ int main() {
 
 	string subject[8] = { "Bahasa Melayu", "English", "History", "Mathematics", "Additional Mathematics", "Biology", "Chemistry", "Physics" };
 	string f5Class[4] = { "5 Alchemilla", "5 Begonia", "5 Calendula", "5 Dahlia" };
+	Class className[4] = { "5 Alchemilla", "5 Begonia", "5 Calendula", "5 Dahlia" };
 
 	// BM - 0
 	// English - 1
