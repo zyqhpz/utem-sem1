@@ -27,7 +27,11 @@ struct Participant {
 	double averageMark;
 };
 
-Participant student[1000];
+struct Form {
+	Participant student[1000];
+};
+
+Form F5[100];
 
 struct Subject3 {
 	int subject3[8];
@@ -52,11 +56,13 @@ struct Participant3 {
 
 Participant3 student3[1000];
 
-int numStudent();
+int numClass();
+//int numStudent(int);
 int displayMenu();
-void getName(int);
-void displayName(int);
-Participant calculateAverageMark(int);
+int* getName(int);
+void displayName(int n[], int);
+//void displayName(int, int);
+/*Participant calculateAverageMark(int);
 void displayTotalMark(int);
 void displayHtoL(int);
 void displayLtoH(int);
@@ -79,7 +85,7 @@ void compareSubjectMark(int, int);
 
 bool compareNameAZ(Participant3, Participant3);
 bool compareNameZA(Participant3, Participant3);
-void displayNameSorted(int);
+void displayNameSorted(int);*/
 
 // main by Fatin
 int main() {
@@ -96,14 +102,13 @@ int main() {
 	// Chem - 6
 	// Physics - 7
 
-	int num = numStudent(), choice, select;
-
-	const int n = num;
-
-	getName(n);
+	int choice, select;
+	int noOfClass = numClass();
+	int c = noOfClass;
+	int* n = getName(noOfClass);
 
 	Participant average;
-	average = calculateAverageMark(n);
+	//average = calculateAverageMark(n);
 
 	do {
 		choice = displayMenu();
@@ -113,66 +118,88 @@ int main() {
 			break;
 		}
 		else if (choice == 1)
-			displayNameSorted(n);
-		else if (choice == 2)
-			displayTotalMark(n);
-		else if (choice == 3)
-			displayHtoL(n);
-		else if (choice == 4) 
-			displayLtoH(n);
-		else if (choice == 5) {
-			select = selectSubject(subject);
-			displayNameWithSubject(select, subject, n);
-		}
-		else if (choice == 6)
-			cout << "Program is not ready yet";
+			displayName(n, c);
+		/*		displayNameSorted(n);
+			else if (choice == 2)
+				displayTotalMark(n);
+			else if (choice == 3)
+				displayHtoL(n);
+			else if (choice == 4)
+				displayLtoH(n);
+			else if (choice == 5) {
+				select = selectSubject(subject);
+				displayNameWithSubject(select, subject, n);
+			}
+			else if (choice == 6)
+				cout << "Program is not ready yet";
+		*/
 		else
 			cout << "Invalid choice";
-
 		cout << endl;
 	} while (choice > -1 || choice < 7);
-
 	return 0;
 }
 
+int numClass() {
+	int c;
+	cout << "Enter the number of class that want to be entered: ";
+	cin >> c;
+	return c;
+}
+
+//int getData(int noOfClass) {
+
+//}
+
 // get number of student in class by Haziq
-int numStudent() {
-	int n;
-	cout << "Enter total number of student that want to be entered: ";
-	cin >> n;
+/*int numStudent(int c) {
+	for (int a = 0; a < c; a++) {
+		int n[1000];
+		cout << "Enter total number of student that want to be entered: ";
+		cin >> n[a];
+		return n[a];
+	}
+}*/
+
+// get input function by Haziq
+int* getName(int c) {
+	static int n[1000];
+	for (int a = 0; a < c; a++) {
+		cout << "\n***********************************************************" << endl;
+		cout << "For Class " << a + 1 << endl;
+		//num[a] = numStudent(c);
+		cout << "Enter total number of student that want to be entered: ";
+		cin >> n[a];
+		for (int i = 0; i < n[a]; i++) {
+			cin.ignore();
+			F5[a].student[i].mark.totalMark = 0;
+			cout << endl << "Enter student name: ";
+			getline(cin, F5[a].student[i].name);
+			cout << "Enter student's IC number: ";
+			getline(cin, F5[a].student[i].icNumber);
+
+			cout << "Enter mark for Bahasa Melayu: ";
+			cin >> F5[a].student[i].mark.bahasa;
+			cout << "Enter mark for English: ";
+			cin >> F5[a].student[i].mark.english;
+			cout << "Enter mark for History: ";
+			cin >> F5[a].student[i].mark.history;
+			cout << "Enter mark for Mathematics: ";
+			cin >> F5[a].student[i].mark.math;
+			cout << "Enter mark for Additional Mathematics: ";
+			cin >> F5[a].student[i].mark.addMath;
+			cout << "Enter mark for Biology: ";
+			cin >> F5[a].student[i].mark.biology;
+			cout << "Enter mark for Chemistry: ";
+			cin >> F5[a].student[i].mark.chemistry;
+			cout << "Enter mark for Physics: ";
+			cin >> F5[a].student[i].mark.physics;
+		}
+	}
 	return n;
 }
 
-// get input function by Haziq
-void getName(int n) {
-	for (int i = 0; i < n; i++) {
-		cin.ignore();
-		student[i].mark.totalMark = 0;
-		cout << endl << "Enter student name: ";
-		getline(cin, student[i].name);
-		cout << "Enter student's IC number: ";
-		getline(cin, student[i].icNumber);
-
-		cout << "Enter mark for Bahasa Melayu: ";
-		cin >> student[i].mark.bahasa;
-		cout << "Enter mark for English: ";
-		cin >> student[i].mark.english;
-		cout << "Enter mark for History: ";
-		cin >> student[i].mark.history;
-		cout << "Enter mark for Mathematics: ";
-		cin >> student[i].mark.math;
-		cout << "Enter mark for Additional Mathematics: ";
-		cin >> student[i].mark.addMath;
-		cout << "Enter mark for Biology: ";
-		cin >> student[i].mark.biology;
-		cout << "Enter mark for Chemistry: ";
-		cin >> student[i].mark.chemistry;
-		cout << "Enter mark for Physics: ";
-		cin >> student[i].mark.physics;
-	}
-}
-
-// display menu function by KaK Lok
+// display menu function by Kak Lok
 int displayMenu() {
 	int choice;
 	cout << endl;
@@ -196,16 +223,28 @@ int displayMenu() {
 }
 
 // display namelist by Kak Lok
-void displayName(int size) {
-	resetValue(size);
-	cout << endl << "\tName\tIC Number" << endl;
-	for (int i = 0; i < size; i++) {
-		cout << i + 1 << ".\t" << student[i].name << "\t" << student[i].icNumber << endl;
+void displayName(int n[], int c) {
+	cout << endl << "\tName\t\tIC Number" << endl;
+	for (int a = 0; a < c; a++) {
+		cout << "\nFor Class " << a + 1 << endl;
+		for (int i = 0; i < n[a]; i++) {
+			cout << i + 1 << ".\t" << F5[a].student[i].name << "\t\t" << F5[a].student[i].icNumber << endl;
+		}
 	}
 }
+/*
+// display namelist by Kak Lok
+void displayName(int size, int c) {
+	//resetValue(size);
+	cout << endl << "\tName\tIC Number" << endl;
+	for (int a = 0; a < c; a++) {
+		for (int i = 0; i < size; i++) {
+			cout << i + 1 << ".\t" << student[a][i].name << "\t" << student[a][i].icNumber << endl;
+		}
+	}
+}*/
 
-
-
+/*
 // calculate average by Kak Lok
 Participant calculateAverageMark(int n) {
 	Participant average;
@@ -491,4 +530,4 @@ void displayNameSorted(int size) {
 	for (int i = 0; i < size; i++) {
 		cout << i + 1 << ".\t" << student3[i].name3 << "\t" << student3[i].icNum3 << endl;
 	}
-}
+}*/
