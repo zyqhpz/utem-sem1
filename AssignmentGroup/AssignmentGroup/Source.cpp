@@ -107,6 +107,7 @@ void compareSubjectMark(int[], int, int);
 bool compareNameAZ(Participant3, Participant3);
 bool compareNameZA(Participant3, Participant3);
 void displayNameSorted(int[], int);
+void loadNameList(int[], int);
 
 // main by Fatin
 int main() {
@@ -127,6 +128,7 @@ int main() {
 	int noOfClass = numClass();
 	int c = noOfClass;
 	int* n = getName(noOfClass);
+	//loadNameList(n, c);
 
 	Participant average;
 	average = calculateAverageMark(n,c);
@@ -140,7 +142,7 @@ int main() {
 		}
 		else if (choice == 1)
 			displayNameSorted(n, c);
-			//displayName(n, c);
+		//displayName(n, c);
 		else if (choice == 2)
 			displayTotalMark(n, c);
 		else if (choice == 3)
@@ -180,8 +182,10 @@ int numStudent() {
 // get input function by Haziq
 int* getName(int c) {
 	static int n[1000];
+	ofstream writeFile("studentData.txt", ios::out | ios::app);
+
 	for (int a = 0; a < c; a++) {
-		cout << "\n***********************************************************" << endl;
+		cout << "\n*********************" << endl;
 		cout << "For Class " << a + 1 << endl;
 		//num[a] = numStudent(c);
 		cout << "Enter total number of student that want to be entered: ";
@@ -210,8 +214,19 @@ int* getName(int c) {
 			cin >> F5[a].student[i].mark.chemistry;
 			cout << "Enter mark for Physics: ";
 			cin >> F5[a].student[i].mark.physics;
+
+			writeFile << F5[a].student[i].name << "\t" << F5[a].student[i].icNumber << endl
+				<< F5[a].student[i].mark.bahasa << " "
+				<< F5[a].student[i].mark.english << " "
+				<< F5[a].student[i].mark.history << " "
+				<< F5[a].student[i].mark.math << " "
+				<< F5[a].student[i].mark.addMath << " "
+				<< F5[a].student[i].mark.biology << " "
+				<< F5[a].student[i].mark.chemistry << " "
+				<< F5[a].student[i].mark.physics << endl;
 		}
 	}
+	writeFile.close();
 	return n;
 }
 
@@ -543,3 +558,31 @@ void displayNameSorted(int n[], int c) {
 	}
 }
 
+void loadNameList(int n[], int c) {
+	string nameStu;
+	int noIC, bahasa, english, history, math, addMath, bio, chem, phy;
+	int count = 1;
+
+	ifstream readFile("studentData.txt", ios::in);
+	if (!readFile)
+		cout << "File doesn't exist.\n";
+	else {
+		cout << "--------Namelist-------\n";
+		while (readFile >> nameStu >> noIC >> bahasa >> english >> history >> math >> addMath >> bio >> chem >> phy) {
+			for (int a = 0; a < c; a++) {
+				for (int i = 0; i < n[i]; i++) {
+					F5[a].student[i].name = nameStu;
+					F5[a].student[i].icNumber = noIC;
+					F5[a].student[i].mark.bahasa = bahasa;
+					F5[a].student[i].mark.english = english;
+					F5[a].student[i].mark.history = history;
+					F5[a].student[i].mark.math = math;
+					F5[a].student[i].mark.addMath = addMath;
+					F5[a].student[i].mark.biology = bio;
+					F5[a].student[i].mark.chemistry = chem;
+					F5[a].student[i].mark.physics = phy;
+				}
+			}
+		}
+	}
+}
