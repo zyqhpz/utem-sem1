@@ -106,14 +106,13 @@ void compareSubjectMark(int[], int, int);
 
 bool compareNameAZ(Participant3, Participant3);
 bool compareNameZA(Participant3, Participant3);
-//void displayNameSorted(int);
+void displayNameSorted(int[], int);
 
 // main by Fatin
 int main() {
 
 	string subject[8] = { "Bahasa Melayu", "English", "History", "Mathematics", "Additional Mathematics", "Biology", "Chemistry", "Physics" };
 	string f5Class[4] = { "5 Alchemilla", "5 Begonia", "5 Calendula", "5 Dahlia" };
-	Class className[4] = { "5 Alchemilla", "5 Begonia", "5 Calendula", "5 Dahlia" };
 
 	// BM - 0
 	// English - 1
@@ -140,8 +139,8 @@ int main() {
 			break;
 		}
 		else if (choice == 1)
-			//displaySort();
-			displayName(n, c);
+			displayNameSorted(n, c);
+			//displayName(n, c);
 		else if (choice == 2)
 			displayTotalMark(n, c);
 		else if (choice == 3)
@@ -251,8 +250,6 @@ void displayName(int n[], int c) {
 	}
 }
 
-
-
 // calculate average by Kak Lok
 Participant calculateAverageMark(int n[], int c) {
 	Participant average;
@@ -265,7 +262,6 @@ Participant calculateAverageMark(int n[], int c) {
 	}
 	return average;
 }
-
 
 // display namelist with mark by Kak Lok
 void displayTotalMark(int n[], int c) {
@@ -380,8 +376,12 @@ int selectSubject(string subject[]) {
 	for (int i = 1; i <= 8; i++) {
 		cout << i << ". " << subject[i - 1] << endl;
 	}
-	cout << "\nSelect subject: ";
-	cin >> select;
+	do {
+		cout << "\nSelect subject: ";
+		cin >> select;
+		if (select < 1 || select > 8)
+			cout << "Invalid choice. Try again.\n";
+	} while (select < 1 || select > 8);
 	return select - 1;
 }
 
@@ -478,7 +478,7 @@ void displayNameWithSubject(int choice, string subject[], int n[], int c) {
 	cout << "=====================================================================================================" << endl;
 
 	for (int a = 0; a < c; a++) {
-		cout << "Class " << a + 1 << endl;
+		cout << "\nClass " << a + 1 << endl;
 		cout << endl << "\tName\tIC Number\t" << subject[choice] << endl;
 
 		for (int i = 0; i < n[a]; i++) {
@@ -506,7 +506,7 @@ void displayNameWithSubject(int choice, string subject[], int n[], int c) {
 	}
 }
 
-/*
+
 bool compareNameAZ(Participant3 a, Participant3 b) {
 	if (a.name3 != b.name3)
 		return a.name3 < b.name3;
@@ -521,20 +521,25 @@ bool compareNameZA(Participant3 a, Participant3 b) {
 		return 0;
 }
 
-void displayNameSorted(int size) {
-	int choice;
+void displayNameSorted(int n[], int c) {
+	int choice, ch;
+	resetValue(n, c);
 	cout << "Select to display in: \n1.\tAscending\n2.\tDescending\nChoose: ";
 	cin >> choice;
-	resetValue(size);
+	ch = choice;
+	for (int a = 0; a < c; a++) {
 	if (choice == 1)
-		sort(student3, student3 + size, compareNameAZ);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareNameAZ);
 	if (choice == 2)
-		sort(student3, student3 + size, compareNameZA);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareNameZA);
+	}
 
-	cout << endl << "\tName\tIC Number" << endl;
-	for (int i = 0; i < size; i++) {
-		cout << i + 1 << ".\t" << student3[i].name3 << "\t" << student3[i].icNum3 << endl;
+	for (int a = 0; a < c; a++) {
+		cout << "\nClass " << a + 1 << endl;
+		cout << endl << "\tName\tIC Number" << endl;
+		for (int i = 0; i < n[a]; i++) {
+			cout << i + 1 << ".\t" << F5_3[a].student3[i].name3 << "\t\t" << F5_3[a].student3[i].icNum3 << endl;
+		}
 	}
 }
 
-*/
