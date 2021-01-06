@@ -84,7 +84,7 @@ Participant calculateAverageMark(int[],int);
 void displayTotalMark(int[], int);
 void displayHtoL(int[], int);
 void displayLtoH(int[], int);
-void reverseRanks(int);
+void reverseRanks(int, int[]);
 void sortRanks(int, int[]);
 //bool compareLowHigh(Class3, Class3);
 bool compareLowHigh(Participant3, Participant3);
@@ -101,8 +101,8 @@ bool compareBio(Participant3, Participant3);
 bool compareChem(Participant3, Participant3);
 bool comparePhy(Participant3, Participant3);
 
-//void displayNameWithSubject(int , string[], int);
-//void compareSubjectMark(int, int);
+void displayNameWithSubject(int, string[], int[], int);
+void compareSubjectMark(int[], int, int);
 
 bool compareNameAZ(Participant3, Participant3);
 bool compareNameZA(Participant3, Participant3);
@@ -148,12 +148,12 @@ int main() {
 			displayHtoL(n,c);
 		else if (choice == 4) 
 			displayLtoH(n,c);
-		/*else if (choice == 5) {
+		else if (choice == 5) {
 			select = selectSubject(subject);
-			displayNameWithSubject(select, subject, n);
+			displayNameWithSubject(select, subject, n, c);
 		}
 		else if (choice == 6)
-			cout << "Program is not ready yet";*/
+			cout << "Program is not ready yet";
 		else
 			cout << "Invalid choice";
 
@@ -294,7 +294,7 @@ bool compareHighLow(Participant3 a, Participant3 b) {
 // function to modify data lowest to highest by Haziq
 void sortRanks(int a, int n[]) {
 	sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareHighLow);
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < n[a]; i++)
 		F5_3[a].student3[i].mark3.rank3 = i + 1;
 }
 
@@ -327,9 +327,9 @@ bool compareLowHigh(Participant3 a, Participant3 b) {
 }
 
 // function to modify data lowest to highest by Haziq
-void reverseRanks(int a) {
-	sort(F5_3[a].student3, F5_3[a].student3 + 4, compareLowHigh);
-		for (int i = 0; i < 4; i++)
+void reverseRanks(int a, int n[]) {
+	sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareLowHigh);
+		for (int i = 0; i < n[a]; i++)
 			F5_3[a].student3[i].mark3.rank3 = i - 1;
 }
 
@@ -338,13 +338,13 @@ void displayLtoH(int n[], int c) {
 
 	resetValue(n,c);
 	for (int a = 0; a < c; a++)
-	reverseRanks(a);
+		reverseRanks(a, n);
 
 	cout << "\n=====================================================================================================" << endl;
 	cout << "|" << setw(60) << "LOWEST MARK TO HIGHEST MARK" << setw(40) << "|" << endl;
 	cout << "=====================================================================================================" << endl;
 
-	for (int a = 0; a < 2; a++) {
+	for (int a = 0; a < c; a++) {
 		cout << "Class " << a + 1 << endl;
 		cout << endl << left << setw(25) << "\tName" << "\tIC Number\tTotal Mark\tAverage Mark" << endl;
 		for (int i = 0; i < n[a]; i++)
@@ -372,7 +372,7 @@ void resetValue(int n[] , int c) {
 		}
 	}
 }
-/*
+
 // select subject by Fatin
 int selectSubject(string subject[]) {
 	int select;
@@ -443,64 +443,70 @@ bool comparePhy(Participant3 a, Participant3 b) {
 }
 
 //function to sort array by Fatin
-void compareSubjectMark(int n, int choice) {
+void compareSubjectMark(int n[], int a, int choice) {
 
 	if (choice == 0)
-		sort(student3, student3 + n, compareBahasa);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareBahasa);
 	else if (choice == 1)
-		sort(student3, student3 + n, compareEnglish);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareEnglish);
 	else if (choice == 2)
-		sort(student3, student3 + n, compareHistory);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareHistory);
 	else if (choice == 3)
-		sort(student3, student3 + n, compareMath);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareMath);
 	else if (choice == 4)
-		sort(student3, student3 + n, compareAddMath);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareAddMath);
 	else if (choice == 5)
-		sort(student3, student3 + n, compareBio);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareBio);
 	else if (choice == 6)
-		sort(student3, student3 + n, compareChem);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], compareChem);
 	else
-		sort(student3, student3 + n, comparePhy);
+		sort(F5_3[a].student3, F5_3[a].student3 + n[a], comparePhy);
 
-	for (int i = 0; i < n; i++)
-		student3[i].mark3.rank3 = i + 1;
+	for (int i = 0; i < n[a]; i++)
+		F5_3[a].student3[i].mark3.rank3 = i + 1;
 }
 
 // display name with highest to lowest mark in certain subject by Fatin
-void displayNameWithSubject(int choice, string subject[], int size) {
-	resetValue(size);
+void displayNameWithSubject(int choice, string subject[], int n[], int c) {
+	
+	resetValue(n, c);
+	for (int a = 0; a < c; a++)
+		compareSubjectMark(n, a, choice);
 
 	cout << "\n=====================================================================================================" << endl;
 	cout << "|" << setw(60) << "HIGHEST MARK TO LOWEST MARK" << setw(40) << "|" << endl;
 	cout << "=====================================================================================================" << endl;
 
-	cout << endl << "\tName\tIC Number\t" << subject[choice] << endl;
-	compareSubjectMark(size, choice);
-	for (int i = 0; i < size; i++) {
-		cout << i + 1 << ".\t" << student3[i].name3 << "\t" << student3[i].icNum3 << "\t\t";
+	for (int a = 0; a < c; a++) {
+		cout << "Class " << a + 1 << endl;
+		cout << endl << "\tName\tIC Number\t" << subject[choice] << endl;
 
-		if (choice == 0)
-			cout << student3[i].mark3.bahasa3;
-		else if (choice == 1)
-			cout << student3[i].mark3.english3;
-		else if (choice == 2)
-			cout << student3[i].mark3.history3;
-		else if (choice == 3)
-			cout << student3[i].mark3.math3;
-		else if (choice == 4)
-			cout << student3[i].mark3.addMath3;
-		else if (choice == 5)
-			cout << student3[i].mark3.biology3;
-		else if (choice == 6)
-			cout << student3[i].mark3.chemistry3;
-		else
-			cout << student3[i].mark3.physics3;
+		for (int i = 0; i < n[a]; i++) {
+			cout << i + 1 << ".\t" << F5_3[a].student3[i].name3 << "\t" << F5_3[a].student3[i].icNum3 << "\t\t";
 
-		cout << endl;
+			if (choice == 0)
+				cout << F5_3[a].student3[i].mark3.bahasa3;
+			else if (choice == 1)
+				cout << F5_3[a].student3[i].mark3.english3;
+			else if (choice == 2)
+				cout << F5_3[a].student3[i].mark3.history3;
+			else if (choice == 3)
+				cout << F5_3[a].student3[i].mark3.math3;
+			else if (choice == 4)
+				cout << F5_3[a].student3[i].mark3.addMath3;
+			else if (choice == 5)
+				cout << F5_3[a].student3[i].mark3.biology3;
+			else if (choice == 6)
+				cout << F5_3[a].student3[i].mark3.chemistry3;
+			else
+				cout << F5_3[a].student3[i].mark3.physics3;
+
+			cout << endl;
+		}
 	}
 }
 
-
+/*
 bool compareNameAZ(Participant3 a, Participant3 b) {
 	if (a.name3 != b.name3)
 		return a.name3 < b.name3;
