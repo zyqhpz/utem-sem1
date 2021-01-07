@@ -65,15 +65,15 @@ struct Class3 {
 
 Class3 F5_3[4];
 
-struct ClassLH {
-	string stuN;
-	double ic;
+struct Form {
+	string name;
+	string ic;
 	double totalM;
-	double avgM;
-	int rankLH;
+	double avg;
+	int rank;
 };
 
-ClassLH form5[100];
+Form form5[100];
 
 int numClass();
 int numStudent();
@@ -86,7 +86,6 @@ void displayHtoL(int[], int);
 void displayLtoH(int[], int);
 void reverseRanks(int, int[]);
 void sortRanks(int, int[]);
-//bool compareLowHigh(Class3, Class3);
 bool compareLowHigh(Participant3, Participant3);
 bool compareHighLow(Participant3, Participant3);
 void resetValue(int[], int);
@@ -109,6 +108,9 @@ bool compareNameZA(Participant3, Participant3);
 void displayNameSorted(int[], int);
 void loadNameList(int[], int);
 
+bool compareAllName(Form, Form);
+void mergeData(int, int[], int&);
+
 // main by Fatin
 int main() {
 
@@ -124,7 +126,7 @@ int main() {
 	// Chem - 6
 	// Physics - 7
 
-	int choice, select;
+	int choice, select, i = 0;
 	int noOfClass = numClass();
 	int c = noOfClass;
 	int* n = getName(noOfClass);
@@ -143,8 +145,15 @@ int main() {
 		else if (choice == 1)
 			displayNameSorted(n, c);
 		//displayName(n, c);
-		else if (choice == 2)
+		else if (choice == 2) {
 			displayTotalMark(n, c);
+			for (int a = 0; a < c; a++)
+				mergeData(a, n, i);
+		sort(form5, form5 + i, compareAllName);
+			cout << "\nThe New Array (Merged Array):\n";
+			for (int j = 0; j < i; j++) 
+				cout << form5[j].name << "\t" << fixed << setprecision(1) << form5[j].avg << "\n";
+		}
 		else if (choice == 3)
 			displayHtoL(n,c);
 		else if (choice == 4) 
@@ -164,6 +173,7 @@ int main() {
 	return 0;
 }
 
+// Kak Lok
 int numClass() {
 	int c;
 	cout << "Enter the number of class that want to be entered: ";
@@ -536,6 +546,7 @@ bool compareNameZA(Participant3 a, Participant3 b) {
 		return 0;
 }
 
+// function to sort name by Haziq
 void displayNameSorted(int n[], int c) {
 	int choice, ch;
 	resetValue(n, c);
@@ -584,5 +595,24 @@ void loadNameList(int n[], int c) {
 				}
 			}
 		}
+	}
+}
+
+bool compareAllName(Form a, Form b) {
+	if (a.totalM != b.totalM)
+		return a.totalM > b.totalM;
+	else
+		return 0;
+}
+
+void mergeData(int a, int n[], int &i) {
+
+	for (int k = 0; k < n[a]; k++)
+	{
+		form5[i].name = F5[a].student[k].name;
+		form5[i].ic = F5[a].student[k].icNumber;
+		form5[i].totalM = F5[a].student[k].mark.totalMark;
+		form5[i].avg = F5[a].student[k].averageMark;
+		i++;
 	}
 }
