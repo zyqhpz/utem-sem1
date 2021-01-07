@@ -35,7 +35,6 @@ struct Class {
 
 Class F5[4];
 
-
 struct Subject3 {
 	int subject3[8];
 	double totalMarkLH;
@@ -113,6 +112,8 @@ void mergeData(int, int[], int&);
 
 // main by Fatin
 int main() {
+
+	// This is a latest coding after lab submission on 7/1/2021 !
 
 	string subject[8] = { "Bahasa Melayu", "English", "History", "Mathematics", "Additional Mathematics", "Biology", "Chemistry", "Physics" };
 	string f5Class[4] = { "5 Alchemilla", "5 Begonia", "5 Calendula", "5 Dahlia" };
