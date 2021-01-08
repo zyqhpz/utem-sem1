@@ -185,55 +185,65 @@ int main() {
 	// Science -					4		
 	// Geography -					5 			
 
-	int choice, select;
+
+
+	int c = 0, numOfClass;
+	int* n = 0;
+	int choice, selectSub, selectOperation;
 	int numStudentF5 = 0, numStudentF4 = 0, numStudentF3 = 0, numStudentF2 = 0, numStudentF1 = 0;
+	
+	Participant average;
 
 	int selectForm = formSelection();
 
-	if (selectForm == 5) {
-		int numOfClass = numClass();
-		int c = numOfClass;
-		int* n = getNameF5(numOfClass);
-	}
-
-	int noOfClass = numClass();
-	int c = noOfClass;
-	int* n = getNameF5(noOfClass);
+	//int noOfClass = numClass();
+	//int c = noOfClass;
+	//int* n = getNameF5(noOfClass);
 	//loadNameList(n, c);
 
-	Participant average;
-	average = calculateAverageMark(n,c);
-
-	do {
-		choice = displayMenu();
-
-		if (choice == 0) {
-			cout << "Program Terminated" << endl;
-			break;
+	if (selectForm == 5) {
+		cout << "1. Enter new data.\n2. Display existing data.\n\nYour choice: ";
+		cin >> selectOperation;
+		if (selectOperation == 1) {
+			numOfClass = numClass();
+			c = numOfClass;
+			n = getNameF5(numOfClass);
 		}
-		else if (choice == 1)
-			displayNameSorted(n, c);
-		//displayName(n, c);
-		else if (choice == 2) {
-			displayTotalMark(n, c);
-			displayAllName(n, c, numStudentF5);
-		}
-		else if (choice == 3)
-			displayHtoL(n,c);
-		else if (choice == 4) 
-			displayLtoH(n,c);
-		else if (choice == 5) {
-			select = selectSubject(subjectUpper);
-			displayNameWithSubject(select, subjectUpper, n, c);
-		}
-		else if (choice == 6)
-			cout << "Program is not ready yet";
-		else
-			cout << "Invalid choice";
+		else {
 
-		cout << endl;
-	} while (choice > -1 || choice < 7);
+			average = calculateAverageMark(n, c);
 
+			do {
+				choice = displayMenu();
+
+				if (choice == 0) {
+					cout << "Program Terminated" << endl;
+					break;
+				}
+				else if (choice == 1)
+					displayNameSorted(n, c);
+				//displayName(n, c);
+				else if (choice == 2) {
+					displayTotalMark(n, c);
+					displayAllName(n, c, numStudentF5);
+				}
+				else if (choice == 3)
+					displayHtoL(n, c);
+				else if (choice == 4)
+					displayLtoH(n, c);
+				else if (choice == 5) {
+					selectSub = selectSubject(subjectUpper);
+					displayNameWithSubject(selectSub, subjectUpper, n, c);
+				}
+				else if (choice == 6)
+					cout << "Program is not ready yet";
+				else
+					cout << "Invalid choice";
+
+				cout << endl;
+			} while (choice > -1 || choice < 7);
+		}
+	}
 	return 0;
 }
 
