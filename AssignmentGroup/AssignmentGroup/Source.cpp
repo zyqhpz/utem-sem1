@@ -663,10 +663,8 @@ void resetValue(int n[], int c, int form) {
 				F3_3[a].student3[i].mark3.english3 = F3[a].student[i].mark.english;
 				F3_3[a].student3[i].mark3.history3 = F3[a].student[i].mark.history;
 				F3_3[a].student3[i].mark3.math3 = F3[a].student[i].mark.math;
-				F3_3[a].student3[i].mark3.addMath3 = F3[a].student[i].mark.addMath;
-				F3_3[a].student3[i].mark3.geography3 = F3[a].student[i].mark.biology;
-				F3_3[a].student3[i].mark3.chemistry3 = F3[a].student[i].mark.chemistry;
-				F3_3[a].student3[i].mark3.physics3 = F3[a].student[i].mark.physics;
+				F3_3[a].student3[i].mark3.science3 = F3[a].student[i].mark.science;
+				F3_3[a].student3[i].mark3.geography3 = F3[a].student[i].mark.geography;
 			}
 		}
 	}
@@ -682,10 +680,8 @@ void resetValue(int n[], int c, int form) {
 				F2_3[a].student3[i].mark3.english3 = F2[a].student[i].mark.english;
 				F2_3[a].student3[i].mark3.history3 = F2[a].student[i].mark.history;
 				F2_3[a].student3[i].mark3.math3 = F2[a].student[i].mark.math;
-				F2_3[a].student3[i].mark3.addMath3 = F2[a].student[i].mark.addMath;
-				F2_3[a].student3[i].mark3.geography3 = F2[a].student[i].mark.biology;
-				F2_3[a].student3[i].mark3.chemistry3 = F2[a].student[i].mark.chemistry;
-				F2_3[a].student3[i].mark3.physics3 = F2[a].student[i].mark.physics;
+				F2_3[a].student3[i].mark3.science3 = F2[a].student[i].mark.science;
+				F2_3[a].student3[i].mark3.geography3 = F2[a].student[i].mark.geography;
 			}
 		}
 	}
@@ -701,10 +697,8 @@ void resetValue(int n[], int c, int form) {
 				F1_3[a].student3[i].mark3.english3 = F1[a].student[i].mark.english;
 				F1_3[a].student3[i].mark3.history3 = F1[a].student[i].mark.history;
 				F1_3[a].student3[i].mark3.math3 = F1[a].student[i].mark.math;
-				F1_3[a].student3[i].mark3.addMath3 = F1[a].student[i].mark.addMath;
-				F1_3[a].student3[i].mark3.geography3 = F1[a].student[i].mark.biology;
-				F1_3[a].student3[i].mark3.chemistry3 = F1[a].student[i].mark.chemistry;
-				F1_3[a].student3[i].mark3.physics3 = F1[a].student[i].mark.physics;
+				F1_3[a].student3[i].mark3.science3 = F1[a].student[i].mark.science;
+				F1_3[a].student3[i].mark3.geography3 = F1[a].student[i].mark.geography;
 			}
 		}
 	}
