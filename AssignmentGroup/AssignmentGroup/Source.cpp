@@ -197,7 +197,6 @@ int main() {
 					choice = displayMenu();
 
 					if (choice == 0) {
-						cout << "Program Terminated" << endl;
 						break;
 					}
 					else if (choice == 1)
@@ -249,7 +248,6 @@ int main() {
 					choice = displayMenu();
 
 					if (choice == 0) {
-						cout << "Program Terminated" << endl;
 						break;
 					}
 					else if (choice == 1)
@@ -285,7 +283,7 @@ int main() {
 	}
 	else if (selectForm == 3) {
 		do {
-			cout << "\n\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
+			cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
 				if (selectOperation == 1) {
 					numOfClassF3 = numClass();
@@ -300,7 +298,6 @@ int main() {
 						choice = displayMenu();
 
 						if (choice == 0) {
-							cout << "Program Terminated" << endl;
 							break;
 						}
 						else if (choice == 1)
@@ -419,7 +416,7 @@ int displayMenu() {
 	cout << "|\t\t\t" << left << setw(40) << "3 - Highest to Lowest Total and Average Mark" << right << setw(33) << "|" << endl;
 	cout << "|\t\t\t" << left << setw(40) << "4 - Lowest to Highest Total and Average Mark" << right << setw(33) << "|" << endl;
 	cout << "|\t\t\t" << left << setw(40) << "5 - Highest to Lowest for Each Subject" << right << setw(37) << "|" << endl;
-	cout << "|\t\t\t" << left << setw(40) << "0 - Exit" << right << setw(37) << "|" << endl;
+	cout << "|\t\t\t" << left << setw(40) << "0 - Previous Menu" << right << setw(37) << "|" << endl;
 	cout << "|" << setw(100) << "|" << endl;
 	cout << "|\t\t\t\t" << left << setw(30) << "Please enter 0/1/2/3/4/5/6 to choose." << right << setw(32) << "|" << endl;
 	cout << "=====================================================================================================" << endl << endl;
