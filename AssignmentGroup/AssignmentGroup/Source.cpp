@@ -136,6 +136,14 @@ int* getNameF3(int);
 void mergeDataF3(int, int n_F3[], int&);
 int selectSubjectLower(string subject[]);
 
+int* getNameF2(int);
+void mergeDataF2(int, int n_F2[], int&);
+int selectSubjectLower(string subject[]);
+
+int* getNameF1(int);
+void mergeDataF1(int, int n_F1[], int&);
+int selectSubjectLower(string subject[]);
+
 
 void displayAllName(int[], int, int, int);
 void displayMainMenu();
@@ -162,13 +170,13 @@ int main() {
 	// Science -					4		
 	// Geography -					5 			
 
-	int c_F5 = 0, numOfClassF5, c_F4 = 0, numOfClassF4, c_F3 = 0, numOfClassF3;
-	int* n_F5 = 0, *n_F4 = 0, *n_F3 = 0;
+	int c_F5 = 0, numOfClassF5, c_F4 = 0, numOfClassF4, c_F3 = 0, numOfClassF3, c_F2 = 0, numOfClassF2, c_F1 = 0, numOfClassF1;
+	int* n_F5 = 0, *n_F4 = 0, *n_F3 = 0, *n_F2 = 0, *n_F1 = 0;
 
 	int choice, selectSub, selectOperation, selectSubLow;
 	int numStudentF5 = 0, numStudentF4 = 0, numStudentF3 = 0, numStudentF2 = 0, numStudentF1 = 0;
 
-	Participant averageF5, averageF4, averageF3;
+	Participant averageF5, averageF4, averageF3, averageF2, averageF1;
 	cout << "=====================================================================================================" << endl;
 	cout << "|                                                                                                   |" << endl;
 	cout << "|                                   STUDENT MARK RECORD SYSTEM                                      |" << endl;
@@ -326,6 +334,104 @@ int main() {
 				cout << "Program Terminated.";
 				break;
 				}
+			else
+				cout << "Invalid input" << endl;
+		} while (selectOperation != 0);
+	}
+	else if (selectForm == 2) {
+	do {
+		cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
+		cin >> selectOperation;
+		if (selectOperation == 1) {
+			numOfClassF2 = numClass();
+			c_F2 = numOfClassF2;
+			n_F2 = getNameF2(numOfClassF2);
+		}
+		else if (selectOperation == 2) {
+
+			averageF2 = calculateAverageMarkLower(n_F2, c_F2, selectForm);
+
+			do {
+				choice = displayMenu();
+
+				if (choice == 0) {
+					break;
+				}
+				else if (choice == 1)
+					displayNameSorted(n_F2, c_F2, selectForm);
+				//displayName(n, c);
+				else if (choice == 2) {
+					displayTotalMark(n_F2, c_F2, selectForm);
+					displayAllName(n_F2, c_F2, numStudentF3, selectForm);
+				}
+				else if (choice == 3)
+					displayHtoL(n_F2, c_F2, selectForm);
+				else if (choice == 4)
+					displayLtoH(n_F2, c_F2, selectForm);
+				else if (choice == 5) {
+					selectSubLow = selectSubjectLower(subjectLower);
+					displayNameWithSubject(selectSubLow, subjectLower, n_F2, c_F2, selectForm);
+				}
+				else
+					cout << "Invalid choice";
+				cout << endl;
+			} while (choice != 0);
+		}
+		else if (selectOperation == 3)
+			int selectForm = formSelection();
+		else if (selectOperation == 0) {
+			cout << "Program Terminated.";
+			break;
+		}
+		else
+			cout << "Invalid input" << endl;
+	} while (selectOperation != 0);
+	}
+	else if (selectForm == 1) {
+		do {
+			cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
+			cin >> selectOperation;
+			if (selectOperation == 1) {
+				numOfClassF1 = numClass();
+				c_F3 = numOfClassF1;
+				n_F3 = getNameF1(numOfClassF1);
+			}
+			else if (selectOperation == 2) {
+
+				averageF1 = calculateAverageMarkLower(n_F1, c_F1, selectForm);
+
+				do {
+					choice = displayMenu();
+
+					if (choice == 0) {
+						break;
+					}
+					else if (choice == 1)
+						displayNameSorted(n_F1, c_F1, selectForm);
+					//displayName(n, c);
+					else if (choice == 2) {
+						displayTotalMark(n_F1, c_F1, selectForm);
+						displayAllName(n_F1, c_F1, numStudentF1, selectForm);
+					}
+					else if (choice == 3)
+						displayHtoL(n_F1, c_F1, selectForm);
+					else if (choice == 4)
+						displayLtoH(n_F1, c_F1, selectForm);
+					else if (choice == 5) {
+						selectSubLow = selectSubjectLower(subjectLower);
+						displayNameWithSubject(selectSubLow, subjectLower, n_F1, c_F1, selectForm);
+					}
+					else
+						cout << "Invalid choice";
+					cout << endl;
+				} while (choice != 0);
+			}
+			else if (selectOperation == 3)
+				int selectForm = formSelection();
+			else if (selectOperation == 0) {
+				cout << "Program Terminated.";
+				break;
+			}
 			else
 				cout << "Invalid input" << endl;
 		} while (selectOperation != 0);
@@ -919,17 +1025,51 @@ void compareSubjectMark(int n[], int a, int choice, int form) {
 		else if (choice == 4)
 			sort(F3_3[a].student3, F3_3[a].student3 + n[a], compareAddMath);
 		else if (choice == 5)
-			sort(F3_3[a].student3, F3_3[a].student3 + n[a], compareBio);
-		else if (choice == 6)
-			sort(F3_3[a].student3, F3_3[a].student3 + n[a], compareChem);
+			sort(F3_3[a].student3, F3_3[a].student3 + n[a], compareSci);
 		else
-			sort(F3_3[a].student3, F3_3[a].student3 + n[a], comparePhy);
+			sort(F3_3[a].student3, F3_3[a].student3 + n[a], compareGeo);
 
 		for (int i = 0; i < n[a]; i++)
 			F3_3[a].student3[i].mark3.rank3 = i + 1;
 	}
-	else
-		cout << "f3";
+	else if (form == 2) {
+		if (choice == 0)
+			sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareBahasa);
+		else if (choice == 1)
+			sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareEnglish);
+		else if (choice == 2)
+			sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareHistory);
+		else if (choice == 3)
+			sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareMath);
+		else if (choice == 4)
+			sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareAddMath);
+		else if (choice == 5)
+			sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareSci);
+		else
+			sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareGeo);
+
+		for (int i = 0; i < n[a]; i++)
+			F2_3[a].student3[i].mark3.rank3 = i + 1;
+	}
+	else {
+		if (choice == 0)
+			sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareBahasa);
+		else if (choice == 1)
+			sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareEnglish);
+		else if (choice == 2)
+			sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareHistory);
+		else if (choice == 3)
+			sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareMath);
+		else if (choice == 4)
+			sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareAddMath);
+		else if (choice == 5)
+			sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareSci);
+		else
+			sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareGeo);
+
+		for (int i = 0; i < n[a]; i++)
+			F1_3[a].student3[i].mark3.rank3 = i + 1;
+	}
 }
 
 // display name with highest to lowest mark in certain subject by Fatin
@@ -1019,8 +1159,54 @@ void displayNameWithSubject(int choice, string subject[], int n[], int c, int fo
 			}
 		}
 	}
-	else
-		cout << "f3";
+	else if (form == 2) {
+		for (int a = 0; a < c; a++) {
+			cout << "\nClass " << a + 1;
+			cout << endl << left << setw(25) << "\tName" << "\tIC Number\t" << subject[choice] << endl;
+			for (int i = 0; i < n[a]; i++) {
+				cout << i + 1 << ".\t" << left << setw(25) << F2_3[a].student3[i].name3 << "\t" << F2_3[a].student3[i].icNum3 << "\t\t";
+
+				if (choice == 0)
+					cout << F2_3[a].student3[i].mark3.bahasa3;
+				else if (choice == 1)
+					cout << F2_3[a].student3[i].mark3.english3;
+				else if (choice == 2)
+					cout << F2_3[a].student3[i].mark3.history3;
+				else if (choice == 3)
+					cout << F2_3[a].student3[i].mark3.math3;
+				else if (choice == 4)
+					cout << F2_3[a].student3[i].mark3.science3;
+				else if (choice == 5)
+					cout << F2_3[a].student3[i].mark3.geography3;
+
+				cout << endl;
+			}
+		}
+	}
+	else {
+		for (int a = 0; a < c; a++) {
+			cout << "\nClass " << a + 1;
+			cout << endl << left << setw(25) << "\tName" << "\tIC Number\t" << subject[choice] << endl;
+			for (int i = 0; i < n[a]; i++) {
+				cout << i + 1 << ".\t" << left << setw(25) << F1_3[a].student3[i].name3 << "\t" << F1_3[a].student3[i].icNum3 << "\t\t";
+
+				if (choice == 0)
+					cout << F1_3[a].student3[i].mark3.bahasa3;
+				else if (choice == 1)
+					cout << F1_3[a].student3[i].mark3.english3;
+				else if (choice == 2)
+					cout << F1_3[a].student3[i].mark3.history3;
+				else if (choice == 3)
+					cout << F1_3[a].student3[i].mark3.math3;
+				else if (choice == 4)
+					cout << F1_3[a].student3[i].mark3.science3;
+				else if (choice == 5)
+					cout << F1_3[a].student3[i].mark3.geography3;
+
+				cout << endl;
+			}
+		}
+	}
 }
 
 bool compareNameAZ(Participant3 a, Participant3 b) {
@@ -1125,8 +1311,62 @@ void displayNameSorted(int n[], int c, int form) {
 			}
 		}
 	}
-	else
-		cout << "f2";
+	else if (form == 2) {
+		cout << "Select to display in: \n1.\tAscending\n2.\tDescending\nChoose: ";
+		cin >> choice;
+		ch = choice;
+		for (int a = 0; a < c; a++) {
+			if (choice == 1)
+				sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareNameAZ);
+			if (choice == 2)
+				sort(F2_3[a].student3, F2_3[a].student3 + n[a], compareNameZA);
+		}
+		if (choice == 1) {
+			cout << "\n*****************************************************************************************************" << endl;
+			cout << "|" << setw(60) << "NAMELIST (ASCENDING)" << setw(40) << "|" << endl;
+			cout << "*****************************************************************************************************";
+		}
+		if (choice == 2) {
+			cout << "\n*****************************************************************************************************" << endl;
+			cout << "|" << setw(60) << "NAMELIST (DESCENDING)" << setw(40) << "|" << endl;
+			cout << "*****************************************************************************************************";
+		}
+		for (int a = 0; a < c; a++) {
+			cout << "\nClass " << a + 1;
+			cout << endl << left << setw(25) << "\tName" << "\tIC Number" << endl;
+			for (int i = 0; i < n[a]; i++) {
+				cout << i + 1 << ".\t" << left << setw(25) << F2_3[a].student3[i].name3 << "\t" << F2_3[a].student3[i].icNum3 << endl;
+			}
+		}
+	}
+	else {
+		cout << "Select to display in: \n1.\tAscending\n2.\tDescending\nChoose: ";
+		cin >> choice;
+		ch = choice;
+		for (int a = 0; a < c; a++) {
+			if (choice == 1)
+				sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareNameAZ);
+			if (choice == 2)
+				sort(F1_3[a].student3, F1_3[a].student3 + n[a], compareNameZA);
+		}
+		if (choice == 1) {
+			cout << "\n*****************************************************************************************************" << endl;
+			cout << "|" << setw(60) << "NAMELIST (ASCENDING)" << setw(40) << "|" << endl;
+			cout << "*****************************************************************************************************";
+		}
+		if (choice == 2) {
+			cout << "\n*****************************************************************************************************" << endl;
+			cout << "|" << setw(60) << "NAMELIST (DESCENDING)" << setw(40) << "|" << endl;
+			cout << "*****************************************************************************************************";
+		}
+		for (int a = 0; a < c; a++) {
+			cout << "\nClass " << a + 1;
+			cout << endl << left << setw(25) << "\tName" << "\tIC Number" << endl;
+			for (int i = 0; i < n[a]; i++) {
+				cout << i + 1 << ".\t" << left << setw(25) << F1_3[a].student3[i].name3 << "\t" << F1_3[a].student3[i].icNum3 << endl;
+			}
+		}
+	}
 }
 
 void loadNameList(int n[], int c, int form) {
@@ -1398,7 +1638,7 @@ Participant calculateAverageMarkLower(int n[], int c, int form) {
 					+ F3[a].student[i].mark.math
 					+ F3[a].student[i].mark.science
 					+ F3[a].student[i].mark.geography;
-				F3[a].student[i].averageMark = F3[a].student[i].mark.totalMark / 7;
+				F3[a].student[i].averageMark = F3[a].student[i].mark.totalMark / 6;
 			}
 		}
 	}
@@ -1412,7 +1652,7 @@ Participant calculateAverageMarkLower(int n[], int c, int form) {
 					+ F2[a].student[i].mark.math
 					+ F2[a].student[i].mark.science
 					+ F2[a].student[i].mark.geography;
-				F2[a].student[i].averageMark = F2[a].student[i].mark.totalMark / 7;
+				F2[a].student[i].averageMark = F2[a].student[i].mark.totalMark / 6;
 			}
 		}
 	}
@@ -1426,31 +1666,13 @@ Participant calculateAverageMarkLower(int n[], int c, int form) {
 					+ F1[a].student[i].mark.math
 					+ F1[a].student[i].mark.science
 					+ F1[a].student[i].mark.geography;
-				F1[a].student[i].averageMark = F1[a].student[i].mark.totalMark / 7;
+				F1[a].student[i].averageMark = F1[a].student[i].mark.totalMark / 6;
 			}
 		}
 	}
 	return averageL;
 }
 
-void resetValueLower(int n_F4[], int c_F4, int form) {
-	for (int a = 0; a < c_F4; a++) {
-		for (int i = 0; i < n_F4[a]; i++) {
-			F3_3[a].student3[i].name3 = F3[a].student[i].name;
-			F3_3[a].student3[i].icNum3 = F3[a].student[i].icNumber;
-			F3_3[a].student3[i].avg3 = F3[a].student[i].averageMark;
-			F3_3[a].student3[i].mark3.totalMark3 = F3[a].student[i].mark.totalMark;
-			F3_3[a].student3[i].mark3.bahasa3 = F3[a].student[i].mark.bahasa;
-			F3_3[a].student3[i].mark3.english3 = F3[a].student[i].mark.english;
-			F3_3[a].student3[i].mark3.history3 = F3[a].student[i].mark.history;
-			F3_3[a].student3[i].mark3.math3 = F3[a].student[i].mark.math;
-			F3_3[a].student3[i].mark3.addMath3 = F3[a].student[i].mark.addMath;
-			F3_3[a].student3[i].mark3.geography3 = F3[a].student[i].mark.biology;
-			F3_3[a].student3[i].mark3.chemistry3 = F3[a].student[i].mark.chemistry;
-			F3_3[a].student3[i].mark3.physics3 = F3[a].student[i].mark.physics;
-		}
-	}
-}
 int selectSubjectLower(string subjectL[]) {
 	int select;
 	cout << "\n=====================================================================================================" << endl;
@@ -1465,6 +1687,6 @@ int selectSubjectLower(string subjectL[]) {
 		cin >> select;
 		if (select < 1 || select > 6)
 			cout << "Invalid choice. Try again.\n";
-	} while (select < 1 || select > 8);
+	} while (select < 1 || select > 6);
 	return select - 1;
 }
