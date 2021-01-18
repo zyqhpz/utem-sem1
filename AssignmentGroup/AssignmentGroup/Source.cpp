@@ -454,7 +454,7 @@ int numStudent() {
 	return n;
 }
 
-// get input function by Haziq
+// get input function by Haziq 
 int* getNameF5(int c) {
 	static int n[1000];
 	ofstream writeFile("studentDataF5.txt", ios::out | ios::app);
@@ -1654,9 +1654,9 @@ int* getNameF3(int c_F3) {
 			cin >> F3[a].student[i].mark.history;
 			cout << "Enter mark for Mathematics: ";
 			cin >> F3[a].student[i].mark.math;
-			cout << "Enter mark for Chemistry: ";
+			cout << "Enter mark for Science: ";
 			cin >> F3[a].student[i].mark.science;
-			cout << "Enter mark for Physics: ";
+			cout << "Enter mark for Geography: ";
 			cin >> F3[a].student[i].mark.geography;
 			cout << endl;
 
@@ -1712,9 +1712,9 @@ int* getNameF2(int c_F2) {
 			cin >> F2[a].student[i].mark.history;
 			cout << "Enter mark for Mathematics: ";
 			cin >> F2[a].student[i].mark.math;
-			cout << "Enter mark for Chemistry: ";
+			cout << "Enter mark for Science: ";
 			cin >> F2[a].student[i].mark.science;
-			cout << "Enter mark for Physics: ";
+			cout << "Enter mark for Geography: ";
 			cin >> F2[a].student[i].mark.geography;
 			cout << endl;
 
@@ -1770,9 +1770,9 @@ int* getNameF1(int c_F1) {
 			cin >> F1[a].student[i].mark.history;
 			cout << "Enter mark for Mathematics: ";
 			cin >> F1[a].student[i].mark.math;
-			cout << "Enter mark for Chemistry: ";
+			cout << "Enter mark for Science: ";
 			cin >> F1[a].student[i].mark.science;
-			cout << "Enter mark for Physics: ";
+			cout << "Enter mark for Geography: ";
 			cin >> F1[a].student[i].mark.geography;
 			cout << endl;
 
