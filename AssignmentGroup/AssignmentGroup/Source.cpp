@@ -6,6 +6,7 @@
 #include <iterator>
 #include <fstream>
 #include <vector>
+#include <stdlib.h>
 using namespace std;
 
 struct Subject {
@@ -151,6 +152,10 @@ void displayAllName(int[], int, int, int);
 void displayMainMenu();
 int formSelection();
 
+void cls() {
+	system("cls");
+}
+
 // main by Fatin
 int main() {
 
@@ -184,6 +189,7 @@ int main() {
 	cout << "|                                   STUDENT MARK RECORD SYSTEM                                      |" << endl;
 	cout << "|                                                                                                   |" << endl;
 	int selectForm = formSelection();
+	cls();
 
 	//int noOfClass = numClass();
 	//int c = noOfClass;
@@ -193,6 +199,7 @@ int main() {
 		do {
 			cout << "\n\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
+			cls();
 			if (selectOperation == 1) {
 				numOfClassF5 = numClass();
 				c_F5 = numOfClassF5;
@@ -244,6 +251,7 @@ int main() {
 		do {
 			cout << "\n\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
+			cls();
 			if (selectOperation == 1) {
 				numOfClassF4 = numClass();
 				c_F4 = numOfClassF4;
@@ -295,6 +303,7 @@ int main() {
 		do {
 			cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
+			cls();
 				if (selectOperation == 1) {
 					numOfClassF3 = numClass();
 					c_F3 = numOfClassF3;
@@ -344,6 +353,7 @@ int main() {
 	do {
 		cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 		cin >> selectOperation;
+		cls();
 		if (selectOperation == 1) {
 			numOfClassF2 = numClass();
 			c_F2 = numOfClassF2;
@@ -393,6 +403,7 @@ int main() {
 		do {
 			cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
+			cls();
 			if (selectOperation == 1) {
 				numOfClassF1 = numClass();
 				c_F3 = numOfClassF1;
