@@ -29,6 +29,7 @@ struct Participant {
 	string icNumber;
 	Subject mark;
 	double averageMark;
+	int classID;
 };
 struct Class {
 	string className[4];
@@ -62,6 +63,7 @@ struct Participant3 {
 	string icNum3;
 	Subject3 mark3;
 	double avg3;
+	int classID3;
 };
 
 struct Class3 {
@@ -80,6 +82,7 @@ struct Form {
 	string ic;
 	double totalM;
 	double avg;
+	int classID;
 	int rank;
 };
 
@@ -467,6 +470,7 @@ int* getNameF5(int c) {
 		cin >> n[a];
 		for (int i = 0; i < n[a]; i++) {
 			cin.ignore();
+			F5[a].student[i].classID = a + 1;
 			F5[a].student[i].mark.totalMark = 0;
 			cout << endl << "Enter student name: ";
 			getline(cin, F5[a].student[i].name);
@@ -1484,6 +1488,7 @@ void mergeData(int a, int n[], int &i) {
 		form5[i].ic = F5[a].student[k].icNumber;
 		form5[i].totalM = F5[a].student[k].mark.totalMark;
 		form5[i].avg = F5[a].student[k].averageMark;
+		form5[i].classID = F5[a].student[k].classID;
 		i++;
 	}
 }
@@ -1496,7 +1501,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 		cout << "\nFORM 5 STUDENTS\n";
 		cout << "Name\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
-			cout << form5[j].name << "\t" << fixed << setprecision(1) << form5[j].avg << "\n";
+			cout << form5[j].name << "\t" << form5[j].classID << "\t" << fixed << setprecision(1) << form5[j].avg << "\n";
 	}
 	if (form == 4) {
 		for (int a = 0; a < c; a++)
@@ -1505,7 +1510,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 		cout << "\nFORM 4 STUDENTS\n";
 		cout << "Name\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
-			cout << form4[j].name << "\t" << fixed << setprecision(1) << form4[j].avg << "\n";
+			cout << form4[j].name << "\t" << form4[j].classID << "\t" << fixed << setprecision(1) << form4[j].avg << "\n";
 	}
 	if (form == 3) {
 		for (int a = 0; a < c; a++)
@@ -1514,7 +1519,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 		cout << "\nFORM 3 STUDENTS\n";
 		cout << "Name\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
-			cout << form3[j].name << "\t" << fixed << setprecision(1) << form3[j].avg << "\n";
+			cout << form3[j].name << "\t" << form3[j].classID << "\t" << fixed << setprecision(1) << form3[j].avg << "\n";
 	}
 	if (form == 2) {
 		for (int a = 0; a < c; a++)
@@ -1523,7 +1528,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 		cout << "\nFORM 2 STUDENTS\n";
 		cout << "Name\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
-			cout << form2[j].name << "\t" << fixed << setprecision(1) << form2[j].avg << "\n";
+			cout << form2[j].name << "\t" << form2[j].classID << "\t" << fixed << setprecision(1) << form2[j].avg << "\n";
 	}
 	if (form == 1) {
 		for (int a = 0; a < c; a++)
@@ -1532,7 +1537,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 		cout << "\nFORM 1 STUDENTS\n";
 		cout << "Name\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
-			cout << form1[j].name << "\t" << fixed << setprecision(1) << form1[j].avg << "\n";
+			cout << form1[j].name << "\t" << form1[j].classID << "\t" << fixed << setprecision(1) << form1[j].avg << "\n";
 	}
 }
 
@@ -1577,6 +1582,7 @@ int* getNameF4(int c_F4) {
 		cin >> n_F4[a];
 		for (int i = 0; i < n_F4[a]; i++) {
 			cin.ignore();
+			F4[a].student[i].classID = a + 1;
 			F4[a].student[i].mark.totalMark = 0;
 			cout << endl << "Enter student name: ";
 			getline(cin, F4[a].student[i].name);
@@ -1624,6 +1630,7 @@ void mergeDataF4(int a, int n_F4[], int &i) {
 		form4[i].ic = F4[a].student[k].icNumber;
 		form4[i].totalM = F4[a].student[k].mark.totalMark;
 		form4[i].avg = F4[a].student[k].averageMark;
+		form4[i].classID = F4[a].student[k].classID;
 		i++;
 	}
 }
@@ -1640,6 +1647,7 @@ int* getNameF3(int c_F3) {
 		cin >> n_F3[a];
 		for (int i = 0; i < n_F3[a]; i++) {
 			cin.ignore();
+			F3[a].student[i].classID = a + 1;
 			F3[a].student[i].mark.totalMark = 0;
 			cout << endl << "Enter student name: ";
 			getline(cin, F3[a].student[i].name);
@@ -1683,6 +1691,7 @@ void mergeDataF3(int a, int n_F3[], int &i) {
 		form3[i].ic = F3[a].student[k].icNumber;
 		form3[i].totalM = F3[a].student[k].mark.totalMark;
 		form3[i].avg = F3[a].student[k].averageMark;
+		form3[i].classID = F3[a].student[k].classID;
 		i++;
 	}
 }
@@ -1698,6 +1707,7 @@ int* getNameF2(int c_F2) {
 		cin >> n_F2[a];
 		for (int i = 0; i < n_F2[a]; i++) {
 			cin.ignore();
+			F2[a].student[i].classID = a + 1;
 			F2[a].student[i].mark.totalMark = 0;
 			cout << endl << "Enter student name: ";
 			getline(cin, F2[a].student[i].name);
@@ -1742,6 +1752,7 @@ void mergeDataF2(int a, int n_F3[], int &i) {
 		form2[i].ic = F2[a].student[k].icNumber;
 		form2[i].totalM = F2[a].student[k].mark.totalMark;
 		form2[i].avg = F2[a].student[k].averageMark;
+		form2[i].classID = F2[a].student[k].classID;
 		i++;
 	}
 }
@@ -1756,6 +1767,7 @@ int* getNameF1(int c_F1) {
 		cin >> n_F1[a];
 		for (int i = 0; i < n_F1[a]; i++) {
 			cin.ignore();
+			F1[a].student[i].classID = a + 1;
 			F1[a].student[i].mark.totalMark = 0;
 			cout << endl << "Enter student name: ";
 			getline(cin, F1[a].student[i].name);
@@ -1800,6 +1812,7 @@ void mergeDataF1(int a, int n_F3[], int &i) {
 		form1[i].ic = F1[a].student[k].icNumber;
 		form1[i].totalM = F1[a].student[k].mark.totalMark;
 		form1[i].avg = F1[a].student[k].averageMark;
+		form1[i].classID = F1[a].student[k].classID;
 		i++;
 	}
 }
