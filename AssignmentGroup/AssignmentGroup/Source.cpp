@@ -189,7 +189,6 @@ int main() {
 	cout << "|                                   STUDENT MARK RECORD SYSTEM                                      |" << endl;
 	cout << "|                                                                                                   |" << endl;
 	int selectForm = formSelection();
-	cls();
 
 	//int noOfClass = numClass();
 	//int c = noOfClass;
@@ -199,14 +198,13 @@ int main() {
 		do {
 			cout << "\n\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
-			cls();
 			if (selectOperation == 1) {
 				numOfClassF5 = numClass();
 				c_F5 = numOfClassF5;
 				n_F5 = getNameF5(numOfClassF5);
 			}
 			else if (selectOperation == 2) {
-				loadNameList(n_F5, c_F5, selectForm);
+				//loadNameList(n_F5, c_F5, selectForm);
 
 				averageF5 = calculateAverageMark(n_F5, c_F5, selectForm);
 
@@ -251,14 +249,13 @@ int main() {
 		do {
 			cout << "\n\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
-			cls();
 			if (selectOperation == 1) {
 				numOfClassF4 = numClass();
 				c_F4 = numOfClassF4;
 				n_F4 = getNameF4(numOfClassF4);
 			}
 			else if (selectOperation == 2) {
-				loadNameList(n_F4, c_F4, selectForm);
+				//loadNameList(n_F4, c_F4, selectForm);
 
 				averageF4 = calculateAverageMark(n_F4, c_F4, selectForm);
 
@@ -303,7 +300,6 @@ int main() {
 		do {
 			cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
-			cls();
 				if (selectOperation == 1) {
 					numOfClassF3 = numClass();
 					c_F3 = numOfClassF3;
@@ -353,7 +349,6 @@ int main() {
 	do {
 		cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 		cin >> selectOperation;
-		cls();
 		if (selectOperation == 1) {
 			numOfClassF2 = numClass();
 			c_F2 = numOfClassF2;
@@ -403,7 +398,6 @@ int main() {
 		do {
 			cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Main Menu.\n0. End Program.\n\nYour choice: ";
 			cin >> selectOperation;
-			cls();
 			if (selectOperation == 1) {
 				numOfClassF1 = numClass();
 				c_F3 = numOfClassF1;
@@ -571,7 +565,7 @@ Participant calculateAverageMark(int n[], int c, int form) {
 			}
 		}
 	}
-	else if (form == 4) {
+	else {
 		for (int a = 0; a < c; a++) {
 			for (int i = 0; i < n[a]; i++) {
 				F4[a].student[i].mark.totalMark = F4[a].student[i].mark.bahasa + F4[a].student[i].mark.english + F4[a].student[i].mark.history + F4[a].student[i].mark.math
@@ -580,17 +574,6 @@ Participant calculateAverageMark(int n[], int c, int form) {
 			}
 		}
 	}
-	else if (form == 3) {
-		for (int a = 0; a < c; a++) {
-			for (int i = 0; i < n[a]; i++) {
-				F3[a].student[i].mark.totalMark = F3[a].student[i].mark.bahasa + F3[a].student[i].mark.english + F3[a].student[i].mark.history + F3[a].student[i].mark.math
-					+ F3[a].student[i].mark.addMath + F3[a].student[i].mark.biology + F3[a].student[i].mark.chemistry + F3[a].student[i].mark.physics;
-				F3[a].student[i].averageMark = F3[a].student[i].mark.totalMark / 8;
-			}
-		}
-	}
-	else
-		cout << "f3";
 	return average;
 }
 
@@ -1510,7 +1493,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 			mergeData(a, n, numS);
 		sort(form5, form5 + numS, compareAllName);
 		cout << "\nFORM 5 STUDENTS\n";
-		cout << "Name\tAverage Mark\n";
+		cout << "Name\tClass\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
 			cout << form5[j].name << "\t" << form5[j].classID << "\t" << fixed << setprecision(1) << form5[j].avg << "\n";
 	}
@@ -1519,7 +1502,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 			mergeDataF4(a, n, numS);
 		sort(form4, form4 + numS, compareAllName);
 		cout << "\nFORM 4 STUDENTS\n";
-		cout << "Name\tAverage Mark\n";
+		cout << "Name\tClass\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
 			cout << form4[j].name << "\t" << form4[j].classID << "\t" << fixed << setprecision(1) << form4[j].avg << "\n";
 	}
@@ -1528,7 +1511,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 			mergeDataF3(a, n, numS);
 		sort(form3, form3 + numS, compareAllName);
 		cout << "\nFORM 3 STUDENTS\n";
-		cout << "Name\tAverage Mark\n";
+		cout << "Name\tClass\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
 			cout << form3[j].name << "\t" << form3[j].classID << "\t" << fixed << setprecision(1) << form3[j].avg << "\n";
 	}
@@ -1537,7 +1520,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 			mergeDataF2(a, n, numS);
 		sort(form2, form2 + numS, compareAllName);
 		cout << "\nFORM 2 STUDENTS\n";
-		cout << "Name\tAverage Mark\n";
+		cout << "Name\tClass\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
 			cout << form2[j].name << "\t" << form2[j].classID << "\t" << fixed << setprecision(1) << form2[j].avg << "\n";
 	}
@@ -1546,7 +1529,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 			mergeDataF1(a, n, numS);
 		sort(form1, form1 + numS, compareAllName);
 		cout << "\nFORM 1 STUDENTS\n";
-		cout << "Name\tAverage Mark\n";
+		cout << "Name\tClass\tAverage Mark\n";
 		for (int j = 0; j < numS; j++)
 			cout << form1[j].name << "\t" << form1[j].classID << "\t" << fixed << setprecision(1) << form1[j].avg << "\n";
 	}
