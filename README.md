@@ -1,3 +1,1 @@
-Coding for BITP1113 course in C++
-
-This is a code for my studies at UTeM.
+Group Project code for BITP1113 course in C++.
