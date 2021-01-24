@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
-#include <vector>
 using namespace std;
 
 struct Subject {
@@ -148,49 +147,9 @@ void displayAllName(int[], int, int, int);
 void displayMainMenu();
 
 void displayFormSelection(int&);
+void checkData(int, bool&);
 
-void checkData(int form, bool &exist) {
-	ifstream checkF;
-	checkF.clear();
-		if (form == 5) {
-			checkF.open("studentDataF5.txt", ios::in);
-			if (!checkF.is_open())
-				exist = false;
-			else
-				exist = true;
-		}
-		if (form == 4) {
-			checkF.open("studentDataF4.txt", ios::in);
-			if (!checkF.is_open())
-				exist = false;
-			else
-				exist = true;
-		}
-		if (form == 3) {
-			checkF.open("studentDataF3.txt", ios::in);
-			if (!checkF.is_open())
-				exist = false;
-			else
-				exist = true;
-		}
-		if (form == 2) {
-			checkF.open("studentDataF2.txt", ios::in);
-			if (!checkF.is_open())
-				exist = false;
-			else 
-				exist = true;
-		}
-		if (form == 1) {
-			checkF.open("studentDataF1.txt", ios::in);
-			if (!checkF.is_open())
-				exist = false;
-			else
-				exist = true;
-		}
-		checkF.close();
-}
-
-// main by Fatin
+// main function by Fatin
 int main() {
 
 	string subjectUpper[8] = { "Bahasa Melayu", "English", "History", "Mathematics", "Additional Mathematics", "Biology", "Chemistry", "Physics" };
@@ -509,7 +468,7 @@ int main() {
 		return 0;
 }
 
-// Kak Lok
+// get number of class by Kak Lok
 int numClass() {
 	int c;
 	cout << "Enter the number of class that want to be entered: ";
@@ -539,7 +498,7 @@ int displayMenu() {
 	return choice;
 }
 
-// get input function by Haziq 
+// get form 5 data by Kak Lok
 int* getNameF5(int c) {
 	static int n[1000];
 	ofstream writeFile("temp5.txt", ios::out | ios::app);
@@ -548,7 +507,6 @@ int* getNameF5(int c) {
 	for (int a = 0; a < c; a++) {
 		cout << "\n*********************" << endl;
 		cout << "For Class " << a + 1 << endl;
-		//num[a] = numStudent(c);
 		cout << "Enter total number of student that want to be entered: ";
 		cin >> n[a];
 		writeFile << n[a] << endl;
@@ -610,7 +568,7 @@ void mergeData(int a, int n[], int &i) {
 		i++;
 	}
 }
-// get data for FORM 4
+// get form 4 data by Kak Lok
 int* getNameF4(int c_F4) {
 	static int n_F4[1000];
 	ofstream writeFile("studentDataF4.txt", ios::out | ios::app);
@@ -679,7 +637,7 @@ void mergeDataF4(int a, int n_F4[], int &i) {
 		i++;
 	}
 }
-// get data for FORM 3
+// get form 3 data by Haziq
 int* getNameF3(int c_F3) {
 	static int n_F3[1000];
 	ofstream writeFile("temp3.txt", ios::out | ios::app);
@@ -744,7 +702,7 @@ void mergeDataF3(int a, int n_F3[], int &i) {
 	}
 }
 
-// get data for FORM 2
+// get form 2 data by Haziq
 int* getNameF2(int c_F2) {
 	static int n_F2[1000];
 	ofstream writeFile("temp2.txt", ios::out | ios::app);
@@ -808,7 +766,7 @@ void mergeDataF2(int a, int n_F3[], int &i) {
 		i++;
 	}
 }
-// get data for FORM 1
+// get form 1 data by Haziq
 int* getNameF1(int c_F1) {
 	static int n_F1[1000];
 	ofstream writeFile("temp1.txt", ios::out | ios::app);
@@ -872,7 +830,6 @@ void mergeDataF1(int a, int n_F3[], int &i) {
 		i++;
 	}
 }
-
 
 // calculate average by Kak Lok
 Participant calculateAverageMark(int n[], int c, int form) {
@@ -994,7 +951,7 @@ void sortRanks(int a, int n[], int form) {
 	}
 }
 
-// modify data highest to lowest by Kak Lok
+// display data highest to lowest by Kak Lok
 void displayHtoL(int n[], int c, int form) {
 	resetValue(n, c, form);
 	for (int a = 0; a < c; a++)
@@ -1003,7 +960,6 @@ void displayHtoL(int n[], int c, int form) {
 	cout << "\n=====================================================================================================" << endl;
 	cout << "|" << setw(60) << "HIGHEST MARK TO LOWEST MARK" << setw(40) << "|" << endl;
 	cout << "=====================================================================================================";
-
 
 	if (form == 5) {
 		for (int a = 0; a < c; a++) {
@@ -1270,7 +1226,7 @@ int selectSubject(string subject[]) {
 	return select - 1;
 }
 
-// function to compare marks between students to arrange mark in array by Haziq
+// function to compare marks between students to arrange mark from highest to lowest by Haziq
 bool compareBahasa(Participant3 a, Participant3 b) {
 	if (a.mark3.bahasa3 != b.mark3.bahasa3)
 		return a.mark3.bahasa3 > b.mark3.bahasa3;
@@ -1339,7 +1295,7 @@ bool compareGeo(Participant3 a, Participant3 b) {
 		return 0;
 }
 
-//function to sort array by Fatin
+//function to sort mark for subject by Haziq
 void compareSubjectMark(int n[], int a, int choice, int form) {
 
 	if (form == 5) {
@@ -1573,14 +1529,14 @@ void displayNameWithSubject(int choice, string subject[], int n[], int c, int fo
 		}
 	}
 }
-
+// sort A-Z by Haziq
 bool compareNameAZ(Participant3 a, Participant3 b) {
 	if (a.name3 != b.name3)
 		return a.name3 < b.name3;
 	else
 		return 0;
 }
-
+// sort Z-A by Haziq
 bool compareNameZA(Participant3 a, Participant3 b) {
 	if (a.name3 != b.name3)
 		return a.name3 > b.name3;
@@ -1733,7 +1689,7 @@ void displayNameSorted(int n[], int c, int form) {
 		}
 	}
 }
-
+// Load existing student data from the file by Haziq
 int *loadNameList(int &c, int form) {
 	static int n[1000];
 	int numS = 0;
@@ -1887,14 +1843,14 @@ int *loadNameList(int &c, int form) {
 	}
 	return n;
 }
-
+// compare total mark to sort marks by Haziq
 bool compareAllName(Form a, Form b) {
 	if (a.totalM != b.totalM)
 		return a.totalM > b.totalM;
 	else
 		return 0;
 }
-
+// sort all student names for a specific batch and display it from highest to lowest by Haziq
 void displayAllName(int n[], int c, int numS, int form) {
 	if (form == 5) {
 		for (int a = 0; a < c; a++)
@@ -1942,7 +1898,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 			cout << form1[j].name << "\t" << form1[j].classID << "\t" << fixed << setprecision(1) << form1[j].avg << "\n";
 	}
 }
-
+// Display main menu by Kak Lok
 void displayMainMenu() {
 	cout << "=====================================================================================================" << endl;
 	cout << "|                                           MAIN MENU                                               |" << endl;
@@ -1958,7 +1914,7 @@ void displayMainMenu() {
 	cout << "|\t\t\t\t" << left << setw(30) << "Please enter 0/1/2/3/4/5 to choose." << right << setw(34) << "|" << endl;
 	cout << "=====================================================================================================" << endl << endl;
 }
-
+// select a specific Form by Fatin
 void displayFormSelection(int &select) {
 	displayMainMenu();
 	do {
@@ -1968,7 +1924,7 @@ void displayFormSelection(int &select) {
 			cout << "Invalid choice\n";
 	} while (select < 0 || select > 5);
 }
-
+// calculate average mark for Lower Form batches by Haziq
 Participant calculateAverageMarkLower(int n[], int c, int form) {
 	Participant averageL;
 
@@ -2016,7 +1972,7 @@ Participant calculateAverageMarkLower(int n[], int c, int form) {
 	}
 	return averageL;
 }
-
+// Select subject for lower batch by Fatin
 int selectSubjectLower(string subjectL[]) {
 	int select;
 	cout << "\n=====================================================================================================" << endl;
@@ -2033,4 +1989,45 @@ int selectSubjectLower(string subjectL[]) {
 			cout << "Invalid choice. Try again.\n";
 	} while (select < 1 || select > 6);
 	return select - 1;
+}
+// Check data, exist or not by Haziq
+void checkData(int form, bool &exist) {
+	ifstream checkF;
+	checkF.clear();
+	if (form == 5) {
+		checkF.open("studentDataF5.txt", ios::in);
+		if (!checkF.is_open())
+			exist = false;
+		else
+			exist = true;
+	}
+	if (form == 4) {
+		checkF.open("studentDataF4.txt", ios::in);
+		if (!checkF.is_open())
+			exist = false;
+		else
+			exist = true;
+	}
+	if (form == 3) {
+		checkF.open("studentDataF3.txt", ios::in);
+		if (!checkF.is_open())
+			exist = false;
+		else
+			exist = true;
+	}
+	if (form == 2) {
+		checkF.open("studentDataF2.txt", ios::in);
+		if (!checkF.is_open())
+			exist = false;
+		else
+			exist = true;
+	}
+	if (form == 1) {
+		checkF.open("studentDataF1.txt", ios::in);
+		if (!checkF.is_open())
+			exist = false;
+		else
+			exist = true;
+	}
+	checkF.close();
 }
