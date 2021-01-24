@@ -1898,6 +1898,7 @@ void displayAllName(int n[], int c, int numS, int form) {
 			cout << form1[j].name << "\t" << form1[j].classID << "\t" << fixed << setprecision(1) << form1[j].avg << "\n";
 	}
 }
+
 // Display main menu by Kak Lok
 void displayMainMenu() {
 	cout << "=====================================================================================================" << endl;
