@@ -237,14 +237,14 @@ int main() {
 				}
 				else if (selectOperation == 3) {} // Go back to select Form
 				else if (selectOperation == 0) {
-					cout << "Program Terminated.";
+					cout << "Program Terminated.\n";
 					break;
 				}
 				else
 					cout << "Invalid input" << endl;
 			} while (selectOperation != 0 && selectOperation != 3);
 		}
-		if (selectForm == 4) {
+		else if (selectForm == 4) {
 			do {
 				cout << "---FORM 4---";
 				cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Select Form.\n0. End Program.\n\nYour choice: ";
@@ -293,14 +293,14 @@ int main() {
 				}
 				else if (selectOperation == 3) {}
 				else if (selectOperation == 0) {
-					cout << "Program Terminated.";
+					cout << "Program Terminated.\n";
 					break;
 				}
 				else
 					cout << "Invalid input" << endl;
 			} while (selectOperation != 0 && selectOperation != 3);
 		}
-		if (selectForm == 3) {
+		else if (selectForm == 3) {
 			do {
 				cout << "\n---FORM 3---";
 				cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to select Form.\n0. End Program.\n\nYour choice: ";
@@ -348,14 +348,14 @@ int main() {
 				}
 				else if (selectOperation == 3)  {}
 				else if (selectOperation == 0) {
-					cout << "Program Terminated.";
+					cout << "Program Terminated.\n";
 					break;
 				}
 				else
 					cout << "Invalid input" << endl;
 			} while (selectOperation != 0 && selectOperation != 3);
 		}
-		if (selectForm == 2) {
+		else if (selectForm == 2) {
 			do {
 				cout << "\n---FORM 2---";
 				cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Select Form\n0. End Program.\n\nYour choice: ";
@@ -403,14 +403,14 @@ int main() {
 				}
 				else if (selectOperation == 3) {}
 				else if (selectOperation == 0) {
-					cout << "Program Terminated.";
+					cout << "Program Terminated.\n";
 					break;
 				}
 				else
 					cout << "Invalid input" << endl;
 			} while (selectOperation != 0 && selectOperation != 3);
 		}
-		if (selectForm == 1) {
+		else {
 			do {
 				cout << "\n---FORM 1---";
 				cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Select Form.\n0. End Program.\n\nYour choice: ";
@@ -457,13 +457,15 @@ int main() {
 				}
 				else if (selectOperation == 3) {}
 				else if (selectOperation == 0) {
-					cout << "Program Terminated.";
+					cout << "Program Terminated.\n";
 					break;
 				}
 				else
 					cout << "Invalid input" << endl;
 			} while (selectOperation != 0 && selectOperation != 3);
 		}
+		if (selectOperation == 0)
+			break;
 	} while (selectForm != 0);
 		return 0;
 }
