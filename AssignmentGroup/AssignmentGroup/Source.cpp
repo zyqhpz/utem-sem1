@@ -201,7 +201,7 @@ int main() {
 				else if (selectOperation == 2) {
 					checkData(selectForm, checkFile);
 					if (!checkFile) {
-						cout << "No Data Available. Please Enter New Data.";
+						cout << "\nNo Data Available. Please Enter New Data.\n";
 					}
 					else {
 						n_F5 = loadNameList(c_F5, selectForm);
@@ -246,7 +246,7 @@ int main() {
 		}
 		else if (selectForm == 4) {
 			do {
-				cout << "---FORM 4---";
+				cout << "\n---FORM 4---";
 				cout << "\n1. Enter new data.\n2. Display existing data.\n3. Back to Select Form.\n0. End Program.\n\nYour choice: ";
 				cin >> selectOperation;
 				if (selectOperation == 1) {
@@ -257,7 +257,7 @@ int main() {
 				else if (selectOperation == 2) {
 					checkData(selectForm, checkFile);
 					if (!checkFile) {
-						cout << "No Data Available. Please Enter New Data.";
+						cout << "\nNo Data Available. Please Enter New Data.\n";
 					}
 					else {
 						n_F4 = loadNameList(c_F4, selectForm);
@@ -313,7 +313,7 @@ int main() {
 				else if (selectOperation == 2) {
 					checkData(selectForm, checkFile);
 					if (!checkFile) {
-						cout << "No Data Available. Please Enter New Data.";
+						cout << "\nNo Data Available. Please Enter New Data.\n";
 					}
 					else {
 						n_F2 = loadNameList(c_F2, selectForm);
@@ -368,7 +368,7 @@ int main() {
 				else if (selectOperation == 2) {
 					checkData(selectForm, checkFile);
 					if (!checkFile) {
-						cout << "No Data Available. Please Enter New Data." << endl;
+						cout << "\nNo Data Available. Please Enter New Data.\n" << endl;
 					}
 					else {
 						n_F2 = loadNameList(c_F2, selectForm);
@@ -423,7 +423,7 @@ int main() {
 				else if (selectOperation == 2) {
 					checkData(selectForm, checkFile);
 					if (!checkFile)
-						cout << "No Data Available. Please Enter New Data." << endl;
+						cout << "\nNo Data Available. Please Enter New Data.\n" << endl;
 					else {
 						n_F1 = loadNameList(c_F1, selectForm);
 						resetValue(n_F1, c_F1, selectForm);
