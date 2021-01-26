@@ -112,6 +112,8 @@ bool compareAddMath(Participant3, Participant3);
 bool compareBio(Participant3, Participant3);
 bool compareChem(Participant3, Participant3);
 bool comparePhy(Participant3, Participant3);
+bool compareGeo(Participant3, Participant3);
+bool compareSci(Participant3, Participant3);
 
 void displayNameWithSubject(int, string[], int[], int, int);
 void compareSubjectMark(int[], int, int, int);
@@ -1764,10 +1766,8 @@ int *loadNameList(int &c, int form) {
 		while (readFileF3.is_open()) {
 			readFileF3 >> numC;
 			c = numC;
-			cout << c;
 			for (int a = 0; a < c; a++) {
 				readFileF3 >> numS;
-				cout << numS;
 				n[a] = numS;
 				for (int i = 0; i < n[a]; i++) {
 					F3[a].student[i].classID = a + 1;
