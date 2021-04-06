@@ -30,6 +30,7 @@ struct Participant {
 	double averageMark;
 	int classID;
 };
+
 struct Class {
 	string className[4];
 	Participant student[1000];
